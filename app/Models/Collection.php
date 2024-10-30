@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Collection extends Model
 {
@@ -12,6 +13,12 @@ class Collection extends Model
         "image",
         "description",
     ];
+
+
+    public function save_book(): MorphOne
+    {
+        return $this->morphOne(SaveBook::class, 'saveable');
+    }
 
     public function books():BelongsToMany
     {

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Book extends Model
 {
@@ -30,6 +32,12 @@ class Book extends Model
         'tags' => 'array',
         'pages' => 'integer'
     ];
+
+
+    public function save_book(): MorphOne
+    {
+        return $this->morphOne(SaveBook::class, 'saveable');
+    }
 
     public function user()
     {

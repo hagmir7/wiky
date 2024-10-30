@@ -9,8 +9,9 @@
     @livewireStyles
 </head>
 <body>
-    @yield('content')
+
     <x-nav />
+    @yield('content')
     @livewireScriptConfig
 </body>
 </html>
