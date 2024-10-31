@@ -36,7 +36,7 @@ class Book extends Model
 
     public function save_book(): MorphOne
     {
-        return $this->morphOne(SaveBook::class, 'saveable');
+        return $this->morphOne(Save::class, 'saveable');
     }
 
     public function user()
