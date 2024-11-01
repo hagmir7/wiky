@@ -1,6 +1,6 @@
 <div class="flex bg-white rounded-lg shadow-md relative hover:shadow-xl transition-shadow border duration-300">
     <div class="w-[110px]">
-        <img src="https://www.z-pdf.com/images/covers/2024/July/6685c3a400cdb/small/9781250010094.jpg"
+        <img src="https://facepy.com/media/books/PNG/2024-11-01/b2eefc450c6343d78c3d33879b6eb475.png"
             alt="Impossible to Forget"
             class="h-full object-cover absolute -top-[22px] -left-[35px] w-[135px] rounded-md shadow-sm" />
     </div>

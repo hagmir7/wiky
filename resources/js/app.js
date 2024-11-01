@@ -11,7 +11,6 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 const swiper = new Swiper('.book-swiper', {
     modules: [Navigation, Pagination, Autoplay],
-    slidesPerView: 3,
     loop: true,
     autoplay: {
         delay: 5000,
