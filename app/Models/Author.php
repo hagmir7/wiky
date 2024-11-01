@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Author extends Model
+class Author extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
     protected $fillable = [
         "user_id",
         "full_name",
@@ -37,5 +39,10 @@ class Author extends Model
     public function country():BelongsTo
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('authors');
     }
 }
