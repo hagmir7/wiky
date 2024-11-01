@@ -1,4 +1,4 @@
-<div class="flex-none w-[421.11px] text-white">
+<div class="flex-none text-white">
     <div class="bg-gray-500 p-4">
         <div class="flex">
             <div class="w-1/3">

@@ -1,9 +1,21 @@
 <section class="relative">
-    <div class="overflow-hidden">
-        <div class="flex transition-transform duration-250 mt-4">
-            <x-swiper-cart />
-            <x-swiper-cart />
-            <x-swiper-cart />
+    <div class="swiper book-swiper overflow-hidden">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <x-swiper-cart />
+            </div>
+            <div class="swiper-slide">
+                <x-swiper-cart />
+            </div>
+            <div class="swiper-slide">
+                <x-swiper-cart />
+            </div>
+            <div class="swiper-slide">
+                <x-swiper-cart />
+            </div>
+            <div class="swiper-slide">
+                <x-swiper-cart />
+            </div>
         </div>
     </div>
 </section>
