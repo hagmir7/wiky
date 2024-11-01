@@ -10,6 +10,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -18,7 +19,7 @@ class AuthorResource extends Resource
 {
     protected static ?string $model = Author::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
@@ -76,9 +77,12 @@ class AuthorResource extends Resource
                 Tables\Columns\TextColumn::make('birth')
                     ->date()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('cover')
-                    ->searchable(),
+                SpatieMediaLibraryImageColumn::make('image')
+                    ->label('Avatar')
+                    ->collection('authors')
+                    ->circular(),
+                SpatieMediaLibraryImageColumn::make('cover')
+                    ->collection('author-cover'),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_verified')
