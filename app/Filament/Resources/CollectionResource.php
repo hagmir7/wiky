@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\CollectionResource\Pages;
 use App\Filament\Resources\CollectionResource\RelationManagers;
 use App\Models\Collection;
@@ -17,8 +18,8 @@ class CollectionResource extends Resource
 {
     protected static ?string $model = Collection::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
+    protected static ?string $navigationGroup = NavigationGroups::CATALOG;
     public static function form(Form $form): Form
     {
         return $form

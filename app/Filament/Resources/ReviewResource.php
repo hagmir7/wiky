@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\ReviewResource\Pages;
 use App\Filament\Resources\ReviewResource\RelationManagers;
 use App\Models\Review;
@@ -17,8 +18,8 @@ class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-star';
+    protected static ?string $navigationGroup = NavigationGroups::CONTENT;
     public static function form(Form $form): Form
     {
         return $form

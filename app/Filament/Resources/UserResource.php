@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\UserStatusEnum;
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
@@ -23,7 +24,7 @@ class UserResource extends Resource
     
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?int $navigationSort = 1;
-    protected static ?string $navigationGroup = 'Manage users';
+    protected static ?string $navigationGroup = NavigationGroups::USERS;
 
     public static function form(Form $form): Form
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\CommentResource\Pages;
 use App\Filament\Resources\CommentResource\RelationManagers;
 use App\Models\Comment;
@@ -17,7 +18,8 @@ class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
+    protected static ?string $navigationGroup = NavigationGroups::CONTENT;
 
     public static function form(Form $form): Form
     {

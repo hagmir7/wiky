@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\LanguageResource\Pages;
 use App\Filament\Resources\LanguageResource\RelationManagers;
 use App\Models\Language;
@@ -17,8 +18,8 @@ class LanguageResource extends Resource
 {
     protected static ?string $model = Language::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-language';
+    protected static ?string $navigationGroup = NavigationGroups::TAXONOMY;
     public static function form(Form $form): Form
     {
         return $form

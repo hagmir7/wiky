@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\QuoteResource\Pages;
 use App\Filament\Resources\QuoteResource\RelationManagers;
 use App\Models\Quote;
@@ -15,9 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QuoteResource extends Resource
 {
-    protected static ?string $model = Quote::class;
+    // protected static ?string $model = Quote::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
+    protected static ?string $navigationGroup = NavigationGroups::CONTENT;
 
     public static function form(Form $form): Form
     {

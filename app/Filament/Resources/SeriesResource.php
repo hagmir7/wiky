@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\SeriesResource\Pages;
 use App\Filament\Resources\SeriesResource\RelationManagers;
 use App\Models\Series;
@@ -17,8 +18,8 @@ class SeriesResource extends Resource
 {
     protected static ?string $model = Series::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-queue-list';
+    protected static ?string $navigationGroup = NavigationGroups::CATALOG;
     public static function form(Form $form): Form
     {
         return $form

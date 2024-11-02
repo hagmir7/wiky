@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\NavigationGroups;
 use App\Filament\Resources\BookResource\Pages;
 use App\Filament\Resources\BookResource\RelationManagers;
 use App\Models\Book;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,7 +19,8 @@ class BookResource extends Resource
 {
     protected static ?string $model = Book::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static ?string $navigationGroup = NavigationGroups::CONTENT;
 
     public static function form(Form $form): Form
     {
@@ -50,7 +53,8 @@ class BookResource extends Resource
                 Forms\Components\TextInput::make('isbn13')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('image')
+                SpatieMediaLibraryFileUpload::make('image')
+                    ->collection
                     ->image()
                     ->required(),
                 Forms\Components\DatePicker::make('publication_date')
