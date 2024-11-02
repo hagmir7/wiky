@@ -10,8 +10,8 @@ class CreateAuthor extends CreateRecord
 {
     protected static string $resource = AuthorResource::class;
 
-    public function mutateFormDataBeforeCreate(array $data): array
-    {
-        dd($data);
-    }
+    // public function mutateFormDataBeforeCreate(array $data): array
+    // {
+    //     dd($data);
+    // }
 }
