@@ -12,6 +12,7 @@
 
     <x-nav />
     @yield('content')
+    <x-footer />
     @livewireScriptConfig
 </body>
 </html>

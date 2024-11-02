@@ -10,6 +10,10 @@
             <x-book-cart />
             <x-book-cart />
             <x-book-cart />
+            <x-book-cart />
+            <x-book-cart />
+            <x-book-cart />
+            <x-book-cart />
 
         </div>
     </div>
