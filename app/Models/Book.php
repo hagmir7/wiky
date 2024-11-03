@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Book extends Model
+class Book extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
     protected $fillable = [
         'name',
         'user_id',
@@ -77,5 +79,10 @@ class Book extends Model
     public function bookQuotes(): HasMany
     {
         return $this->hasMany(BookQuote::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('books');
     }
 }

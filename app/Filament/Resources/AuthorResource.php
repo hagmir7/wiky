@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -36,7 +37,9 @@ class AuthorResource extends Resource
                             ->default(null),
                         Forms\Components\TextInput::make('full_name')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
                         Forms\Components\DatePicker::make('birth')
                             ->required()
                             ->native(false)
@@ -52,7 +55,8 @@ class AuthorResource extends Resource
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make('slug')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->unique(ignoreRecord: true),
                     ])->columnSpan(2),
                 Forms\Components\Section::make()
                     ->schema([

@@ -12,6 +12,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -26,50 +27,103 @@ class BookResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'id')
-                    ->required(),
-                Forms\Components\Select::make('author_id')
-                    ->relationship('author', 'id')
-                    ->required(),
-                Forms\Components\Select::make('series_id')
-                    ->relationship('series', 'name')
-                    ->default(null),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('content')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('tags')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('isbn')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('isbn13')
-                    ->required()
-                    ->maxLength(255),
-                SpatieMediaLibraryFileUpload::make('image')
-                    ->collection
-                    ->image()
-                    ->required(),
-                Forms\Components\DatePicker::make('publication_date')
-                    ->required(),
-                Forms\Components\TextInput::make('pages')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('file')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('status')
-                    ->required(),
+                Forms\Components\Section::make()
+                    ->schema([
+                        // Main Content Group (2 columns wide)
+                        Forms\Components\Group::make()
+                            ->schema([
+                                // Basic Information
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Book Title')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
+
+                                Forms\Components\TextInput::make('slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(ignoreRecord: true),
+
+                                Forms\Components\Textarea::make('description')
+                                    ->required(),
+
+                                Forms\Components\MarkdownEditor::make('content')
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ])
+                            ->columnSpan(2),
+
+                        // Sidebar Information (1 column wide)
+                        Forms\Components\Group::make()
+                            ->schema([
+                                // Authors and Series
+                                Forms\Components\Select::make('user_id')
+                                    ->relationship('user', 'id')
+                                    ->preload()
+                                    ->searchable()
+                                    ->required()
+                                    ->label('User'),
+
+                                Forms\Components\Select::make('author_id')
+                                    ->relationship('author', 'id')
+                                    ->preload()
+                                    ->searchable()
+                                    ->required(),
+
+                                Forms\Components\Select::make('series_id')
+                                    ->relationship('series', 'name')
+                                    ->preload()
+                                    ->searchable()
+                                    ->default(null),
+
+                                // ISBN Information
+                                Forms\Components\TextInput::make('isbn')
+                                    ->required()
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('isbn13')
+                                    ->required()
+                                    ->maxLength(255),
+                            ])
+                            ->columnSpan(1),
+
+                        // Additional Details (2 columns wide)
+                        Forms\Components\Group::make()
+                            ->schema([
+                                // Tags and Media
+                                Forms\Components\TagsInput::make('tags')
+                                    ->required()
+                                    ->columnSpanFull(),
+
+                                SpatieMediaLibraryFileUpload::make('image')
+                                    ->collection('books')
+                                    ->image()
+                                    ->required()
+                                    ->columnSpanFull(),
+
+                                // Book Details
+                                Forms\Components\Grid::make(2)
+                                    ->schema([
+                                        Forms\Components\TextInput::make('pages')
+                                            ->required()
+                                            ->numeric(),
+
+                                        Forms\Components\DatePicker::make('publication_date')
+                                            ->required(),
+                                    ]),
+
+                                Forms\Components\TextInput::make('file')
+                                    ->maxLength(255)
+                                    ->default(null),
+
+                                Forms\Components\Toggle::make('status')
+                                    ->required()
+                                    ->default(true),
+                            ])
+                            ->columnSpan(2),
+                    ])
+                    ->columns(3)
             ]);
     }
 
