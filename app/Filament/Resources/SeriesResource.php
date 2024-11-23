@@ -32,17 +32,14 @@ class SeriesResource extends Resource
                             ->maxLength(255)
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
+                        Forms\Components\TagsInput::make('tags')
+                            ->required(),
                         Forms\Components\MarkdownEditor::make('description')
                             ->required(),
                     ])->columnSpan(2),
                 Forms\Components\Section::make()
                     ->schema([
-                        Forms\Components\TagsInput::make('tags')
-                            ->required(),
+
                         Forms\Components\Toggle::make('status')
                             ->required(),
                     ])->columnSpan(1)

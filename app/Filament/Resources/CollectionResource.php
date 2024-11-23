@@ -26,19 +26,28 @@ class CollectionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make()
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\MarkdownEditor::make('description')
-                            ->required()
-                            ->columnSpanFull(),
-                        SpatieMediaLibraryFileUpload::make('image')
-                            ->collection('collections')
-                            ->image()
-                            ->required(),
+                        Forms\Components\Section::make()
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\MarkdownEditor::make('description')
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ])->columnSpan(2),
+
+                        Forms\Components\Section::make()
+                            ->schema([
+                                SpatieMediaLibraryFileUpload::make('image')
+                                    ->collection('collections')
+                                    ->image()
+                                    ->required(),
+                            ])->columnSpan(1)
+
                     ])
+
             ]);
     }
 

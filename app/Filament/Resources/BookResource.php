@@ -27,46 +27,52 @@ class BookResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make()
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        // Main Content Group (2 columns wide)
-                        Forms\Components\Group::make()
+                        Forms\Components\Section::make()
                             ->schema([
-                                // Basic Information
                                 Forms\Components\TextInput::make('name')
                                     ->label('Book Title')
                                     ->required()
-                                    ->maxLength(255)
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-
-                                Forms\Components\TextInput::make('slug')
+                                    ->columnSpanFull()
+                                    ->maxLength(255),
+                                Forms\Components\TagsInput::make('tags')
                                     ->required()
-                                    ->maxLength(255)
-                                    ->unique(ignoreRecord: true),
+                                    ->columnSpanFull(),
+                                Forms\Components\TextInput::make('pages')
+                                    ->required()
+                                    ->numeric(),
 
-                                Forms\Components\Textarea::make('description')
+                                Forms\Components\DatePicker::make('publication_date')
+                                    ->native(false)
                                     ->required(),
 
+
+
+                                Forms\Components\Toggle::make('status')
+                                    ->required()
+                                    ->default(true),
+                                Forms\Components\Textarea::make('description')
+                                    ->columnSpanFull()
+                                    ->required(),
                                 Forms\Components\MarkdownEditor::make('content')
                                     ->required()
                                     ->columnSpanFull(),
+
                             ])
+                            ->columns(2)
                             ->columnSpan(2),
 
-                        // Sidebar Information (1 column wide)
-                        Forms\Components\Group::make()
+                        Forms\Components\Section::make()
                             ->schema([
-                                // Authors and Series
-                                Forms\Components\Select::make('user_id')
-                                    ->relationship('user', 'id')
-                                    ->preload()
-                                    ->searchable()
+                                SpatieMediaLibraryFileUpload::make('image')
+                                    ->collection('books')
+                                    ->image()
                                     ->required()
-                                    ->label('User'),
-
+                                    ->columnSpanFull(),
+                                Forms\Components\FileUpload::make('file'),
                                 Forms\Components\Select::make('author_id')
-                                    ->relationship('author', 'id')
+                                    ->relationship('author', 'full_name')
                                     ->preload()
                                     ->searchable()
                                     ->required(),
@@ -85,45 +91,11 @@ class BookResource extends Resource
                                 Forms\Components\TextInput::make('isbn13')
                                     ->required()
                                     ->maxLength(255),
+
+
                             ])
-                            ->columnSpan(1),
-
-                        // Additional Details (2 columns wide)
-                        Forms\Components\Group::make()
-                            ->schema([
-                                // Tags and Media
-                                Forms\Components\TagsInput::make('tags')
-                                    ->required()
-                                    ->columnSpanFull(),
-
-                                SpatieMediaLibraryFileUpload::make('image')
-                                    ->collection('books')
-                                    ->image()
-                                    ->required()
-                                    ->columnSpanFull(),
-
-                                // Book Details
-                                Forms\Components\Grid::make(2)
-                                    ->schema([
-                                        Forms\Components\TextInput::make('pages')
-                                            ->required()
-                                            ->numeric(),
-
-                                        Forms\Components\DatePicker::make('publication_date')
-                                            ->required(),
-                                    ]),
-
-                                Forms\Components\TextInput::make('file')
-                                    ->maxLength(255)
-                                    ->default(null),
-
-                                Forms\Components\Toggle::make('status')
-                                    ->required()
-                                    ->default(true),
-                            ])
-                            ->columnSpan(2),
+                            ->columnSpan(1)
                     ])
-                    ->columns(3)
             ]);
     }
 

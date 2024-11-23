@@ -2,7 +2,7 @@
     <div class="w-[110px]">
         <img src="https://facepy.com/media/books/PNG/2024-11-01/b2eefc450c6343d78c3d33879b6eb475.png"
             alt="Impossible to Forget"
-            class="h-full object-cover absolute -top-[22px] -left-[35px] w-[135px] rounded-md shadow-sm" />
+            class="h-full absolute -top-[22px] -left-[35px] w-[135px] rounded-md shadow-sm" />
     </div>
     <div class="w-2/3 md:w-3/4 p-4">
         <h2 class="text-md font-semibold text-gray-800 mb-1">

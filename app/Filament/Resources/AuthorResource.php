@@ -30,42 +30,43 @@ class AuthorResource extends Resource
             ->schema([
                 Forms\Components\Section::make()
                     ->schema([
-                        Forms\Components\Select::make('user_id')
-                            ->relationship('user', 'first_name')
-                            ->preload()
-                            ->searchable()
-                            ->default(null),
+                        SpatieMediaLibraryFileUpload::make('image')
+                            ->collection('authors')
+                            ->alignCenter()
+                            ->label(false)
+                            ->avatar(),
+                        SpatieMediaLibraryFileUpload::make('cover')
+                            ->collection('author-cover')
+                            ->image(),
+
                         Forms\Components\TextInput::make('full_name')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
+
+                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->rows(6)
+                            ->columnSpanFull(),
+                    ])->columnSpan(2),
+                        Forms\Components\Section::make()
+                            ->schema([Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'first_name')
+                            ->preload()
+                            ->searchable()
+                            ->default(null),
                         Forms\Components\DatePicker::make('birth')
                             ->required()
                             ->native(false)
                             ->closeOnDateSelection(),
-                        SpatieMediaLibraryFileUpload::make('image')
-                            ->collection('authors')
-                            ->avatar(),
-                        SpatieMediaLibraryFileUpload::make('cover')
-                            ->collection('author-cover')
-                            ->image(),
-                        Forms\Components\Textarea::make('description')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                    ])->columnSpan(2),
-                Forms\Components\Section::make()
-                    ->schema([
-                        Forms\Components\Toggle::make('is_verified')
-                            ->required(),
+
                         Forms\Components\Select::make('country_id')
                             ->relationship('country', 'name')
                             ->preload()
                             ->searchable()
+                            ->required(),
+                        Forms\Components\Toggle::make('is_verified')
                             ->required(),
                     ])->columnSpan(1)
             ])->columns(3);
