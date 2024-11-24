@@ -19,10 +19,8 @@ return new class extends Migration
             $table->foreignId('series_id')->nullable()->constrained()->onDelete('set null');
             $table->text('description');
             $table->longText('content');
-            $table->text('tags');
             $table->string('isbn');
             $table->string('isbn13');
-            $table->string('image');
             $table->date('publication_date');
             $table->integer('pages');
             $table->string('file')->nullable();

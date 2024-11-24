@@ -12,6 +12,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
@@ -60,7 +61,18 @@ class AuthorResource extends Resource
                             ->required()
                             ->native(false)
                             ->closeOnDateSelection(),
-
+                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('slug')
+                            ->required()
+                            ->maxLength(255)
+                            ->unique(ignoreRecord: true),
+                    ])->columnSpan(2),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\Toggle::make('is_verified')
+                            ->required(),
                         Forms\Components\Select::make('country_id')
                             ->relationship('country', 'name')
                             ->preload()
@@ -76,24 +88,25 @@ class AuthorResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.id')
-                    ->numeric()
-                    ->sortable(),
+                SpatieMediaLibraryImageColumn::make('avatar')
+                    ->collection('authors-avatar')
+                    ->circular(),
+
                 Tables\Columns\TextColumn::make('full_name')
                     ->searchable(),
+
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label('User Email')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('birth')
                     ->date()
                     ->sortable(),
-                SpatieMediaLibraryImageColumn::make('image')
-                    ->label('Avatar')
-                    ->collection('authors')
-                    ->circular(),
+
                 SpatieMediaLibraryImageColumn::make('cover')
-                    ->collection('author-cover'),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('is_verified')
-                    ->boolean(),
+                    ->collection('authors-cover'),
+
+                Tables\Columns\ToggleColumn::make('is_verified'),
                 Tables\Columns\TextColumn::make('country.name')
                     ->numeric()
                     ->sortable(),
@@ -107,8 +120,12 @@ class AuthorResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
-            ])
+                Tables\Filters\TernaryFilter::make('is_verified')
+                    ->label('User Verification Status')
+                    ->placeholder('Both')
+                    ->trueLabel('Verified')
+                    ->falseLabel('Unverified'),
+            ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

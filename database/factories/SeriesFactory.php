@@ -20,7 +20,6 @@ class SeriesFactory extends Factory
         return [
             'name' => $name,
             'description' => $this->faker->paragraphs(2, true),
-            'tags' => json_encode($this->faker->words(5)),
             'slug' => Str::slug($name),
             'status' => $this->faker->boolean(),
         ];

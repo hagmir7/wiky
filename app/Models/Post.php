@@ -6,23 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia, HasTags;
     protected $fillable = [
         'title',
         'user_id',
         'description',
-        'tags',
         'book_id',
-        'image',
         'content',
         'slug',
-    ];
-
-    protected $casts = [
-        'tags' => 'array'
     ];
 
     public function user():BelongsTo
@@ -36,5 +33,11 @@ class Post extends Model
     public function categories():BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'post_categories');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('posts-cover')
+            ->singleFile();
     }
 }

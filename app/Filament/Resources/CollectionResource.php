@@ -41,7 +41,7 @@ class CollectionResource extends Resource
                         Forms\Components\Section::make()
                             ->schema([
                                 SpatieMediaLibraryFileUpload::make('image')
-                                    ->collection('collections')
+                                    ->collection('collections-cover')
                                     ->image()
                                     ->required(),
                             ])->columnSpan(1)
@@ -55,10 +55,14 @@ class CollectionResource extends Resource
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('image')
+                    ->collection('collections-cover'),
+
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                SpatieMediaLibraryImageColumn::make('image')
-                    ->collection('collections'),
+
+                Tables\Columns\TextColumn::make('description')
+                    ->limit(40),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

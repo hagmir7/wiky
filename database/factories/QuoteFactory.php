@@ -7,9 +7,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BookQuote>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Quote>
  */
-class BookQuoteFactory extends Factory
+class QuoteFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,7 +21,7 @@ class BookQuoteFactory extends Factory
         return [
             'user_id' => User::factory(),
             'book_id' => Book::factory(),
-            'status' => $this->faker->boolean(90),
+            'status' => $this->faker->randomElement([0,1]),
             'quote' => $this->faker->paragraph(),
         ];
     }

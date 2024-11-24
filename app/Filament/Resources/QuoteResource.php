@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QuoteResource extends Resource
 {
-    // protected static ?string $model = Quote::class;
+    protected static ?string $model = Quote::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
     protected static ?string $navigationGroup = NavigationGroups::CONTENT;
@@ -25,15 +25,42 @@ class QuoteResource extends Resource
     {
         return $form
             ->schema([
-                //
-            ]);
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'first_name')
+                            ->preload()
+                            ->searchable()
+                            ->required(),
+
+                        Forms\Components\Select::make('book_id')
+                            ->relationship('book', 'name')
+                            ->preload()
+                            ->searchable()
+                            ->required(),
+
+                        Forms\Components\Textarea::make('quote')
+                            ->required(),
+                    ])->columnSpan(2),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\Toggle::make('status')
+                            ->label('Published'),
+                    ])->columnSpan(1)
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('quote')
+                    ->limit('40'),
+                Tables\Columns\TextColumn::make('user.first_name'),
+                Tables\Columns\TextColumn::make('book.name')
+                    ->limit(30),
+                Tables\Columns\ToggleColumn::make('status')
+                    ->label('Published'),
             ])
             ->filters([
                 //

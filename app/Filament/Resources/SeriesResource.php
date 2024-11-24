@@ -39,7 +39,7 @@ class SeriesResource extends Resource
                     ])->columnSpan(2),
                 Forms\Components\Section::make()
                     ->schema([
-
+                        Forms\Components\SpatieTagsInput::make('tags'),
                         Forms\Components\Toggle::make('status')
                             ->required(),
                     ])->columnSpan(1)
@@ -52,7 +52,7 @@ class SeriesResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
+                Tables\Columns\SpatieTagsColumn::make('tags')
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('status'),
                 Tables\Columns\TextColumn::make('created_at')

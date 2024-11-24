@@ -30,7 +30,7 @@ class Comment extends Model
         return $this->belongsTo(Collection::class);
     }
 
-    public function parentComment()
+    public function parent()
     {
         return $this->belongsTo(Comment::class, 'comment_id');
     }

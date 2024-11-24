@@ -20,7 +20,7 @@ class CountryResource extends Resource
     protected static ?string $model = Country::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
-    protected static ?string $navigationGroup = NavigationGroups::TAXONOMY;
+    protected static ?string $navigationGroup = NavigationGroups::LOCALIZATION;
     public static function form(Form $form): Form
     {
         return $form

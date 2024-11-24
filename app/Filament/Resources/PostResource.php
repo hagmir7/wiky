@@ -7,9 +7,11 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,32 +28,41 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255)
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'id')
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('tags')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Select::make('book_id')
-                    ->relationship('book', 'name')
-                    ->default(null),
-                Forms\Components\FileUpload::make('image')
-                    ->image(),
-                Forms\Components\Textarea::make('content')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\Group::make()
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn($state, Forms\Set $set) => $set('slug', Str::slug($state))),
+                                Forms\Components\TextInput::make('slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(ignoreRecord: true),
+                                Forms\Components\Textarea::make('description')
+                                    ->required()
+                                    ->columnSpanFull(),
+                                Forms\Components\RichEditor::make('content')
+                                    ->required()
+                                    ->columnSpanFull(),
+
+                            ])->columnSpan(2),
+
+                        Forms\Components\Group::make()
+                            ->schema([
+                                Forms\Components\Select::make('book_id')
+                                    ->relationship('book', 'name')
+                                    ->preload()
+                                    ->searchable(),
+                                Forms\Components\SpatieTagsInput::make('tags')
+                                    ->columnSpanFull(),
+                                SpatieMediaLibraryFileUpload::make('image')
+                                    ->collection('posts-cover')
+                                    ->image(),
+                            ])->columnSpan(1)
+                    ])->columns(3)
             ]);
     }
 
@@ -67,9 +78,9 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('book.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                SpatieMediaLibraryImageColumn::make('image')
+                    ->collection('posts-cover'),
+                Tables\Columns\SpatieTagsColumn::make('tags'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

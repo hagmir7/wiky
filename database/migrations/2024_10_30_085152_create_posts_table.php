@@ -16,9 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->foreignIdFor(\App\Models\User::class);
             $table->text('description');
-            $table->text('tags');
             $table->foreignId('book_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('image')->nullable();
             $table->longText('content');
             $table->string('slug')->unique();
             $table->timestamps();

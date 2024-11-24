@@ -23,9 +23,7 @@ class PostFactory extends Factory
             'title' => $title,
             'user_id' => User::factory(),
             'description' => $this->faker->paragraph(),
-            'tags' => json_encode($this->faker->words(5)),
             'book_id' => $this->faker->boolean(70) ? Book::factory() : null,
-            'image' => $this->faker->boolean(80) ? $this->faker->imageUrl(800, 400) : null,
             'content' => $this->faker->paragraphs(5, true),
             'slug' => Str::slug($title),
         ];

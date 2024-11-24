@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 
 class Book extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, HasTags;
     protected $fillable = [
         'name',
         'user_id',
@@ -21,10 +22,8 @@ class Book extends Model implements HasMedia
         'series_id',
         'description',
         'content',
-        'tags',
         'isbn',
         'isbn13',
-        'image',
         'publication_date',
         'pages',
         'file',
@@ -35,7 +34,6 @@ class Book extends Model implements HasMedia
     protected $casts = [
         'publication_date' => 'date',
         'status' => 'boolean',
-        'tags' => 'array',
         'pages' => 'integer'
     ];
 
@@ -63,12 +61,12 @@ class Book extends Model implements HasMedia
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class, 'book_categories');
+        return $this->belongsToMany(Category::class, 'book_category');
     }
 
     public function collections(): BelongsToMany
     {
-        return $this->belongsToMany(Collection::class, 'book_collections');
+        return $this->belongsToMany(Collection::class, 'book_collection');
     }
 
     public function reviews(): HasMany
@@ -76,13 +74,13 @@ class Book extends Model implements HasMedia
         return $this->hasMany(Review::class);
     }
 
-    public function bookQuotes(): HasMany
+    public function quotes(): BelongsToMany
     {
-        return $this->hasMany(BookQuote::class);
+        return $this->belongsToMany(Quote::class, 'book_quote');
     }
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('books');
+        $this->addMediaCollection('books-cover');
     }
 }

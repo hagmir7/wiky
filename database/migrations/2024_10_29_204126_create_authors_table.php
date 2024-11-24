@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->string('full_name')->unique();
             $table->date('birth');
-            $table->string('image')->nullable();
-            $table->string('cover')->nullable();
             $table->text('description');
             $table->string('slug')->unique();
             $table->boolean('is_verified');

@@ -29,7 +29,6 @@ class User extends Authenticatable implements FilamentUser, HasName, HasMedia
         'email',
         'password',
         'status',
-        'avatar'
     ];
 
     /**
@@ -47,9 +46,6 @@ class User extends Authenticatable implements FilamentUser, HasName, HasMedia
         return "{$this->first_name} {$this->last_name}";
     }
 
-
-
-
     /**
      * Get the attributes that should be cast.
      *
@@ -64,6 +60,10 @@ class User extends Authenticatable implements FilamentUser, HasName, HasMedia
         ];
     }
 
+    public function authors()
+    {
+        return $this->hasMany(Author::class);
+    }
     public function books()
     {
         return $this->hasMany(Book::class);
@@ -86,6 +86,6 @@ class User extends Authenticatable implements FilamentUser, HasName, HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('avatars');
+        $this->addMediaCollection('users-avatar');
     }
 }

@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
 use App\Enums\UserStatusEnum;
 use Illuminate\Database\Seeder;
-use App\Models\{User, Language, Category, Country, Author, Series, Book, Collection, Review, Post, Comment, BookQuote};
+use App\Models\{User, Language, Category, Country, Author, Series, Book, Collection, Review, Post, Comment, Quote};
 
 class DatabaseSeeder extends Seeder
 {
@@ -55,7 +55,6 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'admin',
             'email' => 'admin@admin.com',
             'status' => UserStatusEnum::Active->value,
-            'avatar' => '',
         ]);
     }
 
@@ -131,7 +130,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Create quotes and attach to books
-        BookQuote::factory(self::QUOTE_COUNT)->create([
+        Quote::factory(self::QUOTE_COUNT)->create([
             'user_id' => fn() => $this->users->random()->id,
             'book_id' => fn() => $this->books->random()->id,
         ]);

@@ -10,10 +10,12 @@
         "bezhansalleh/filament-shield": "^3.2",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
+        "filament/spatie-laravel-tags-plugin": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/telescope": "^5.2",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "mokhosh/filament-rating": "^1.4",
         "spatie/laravel-sluggable": "^3.6"
     },
     "require-dev": {
