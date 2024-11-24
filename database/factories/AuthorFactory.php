@@ -23,8 +23,6 @@ class AuthorFactory extends Factory
             'user_id' => null,
             'full_name' => $fullName,
             'birth' => $this->faker->date(),
-            'image' => $this->faker->imageUrl(400, 600, 'people'),
-            'cover' => $this->faker->imageUrl(1200, 400),
             'description' => $this->faker->paragraphs(3, true),
             'slug' => Str::slug($fullName),
             'is_verified' => $this->faker->boolean(),

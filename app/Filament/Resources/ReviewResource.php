@@ -13,6 +13,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Mokhosh\FilamentRating\Columns\RatingColumn;
+use Mokhosh\FilamentRating\Components\Rating;
+use Mokhosh\FilamentRating\RatingTheme;
 
 class ReviewResource extends Resource
 {
@@ -24,38 +27,46 @@ class ReviewResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'id')
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'first_name')
+                    ->preload()
+                    ->searchable()
                     ->required(),
                 Forms\Components\Select::make('book_id')
                     ->relationship('book', 'name')
+                    ->preload()
+                    ->searchable()
                     ->required(),
-                Forms\Components\TextInput::make('rating')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\Textarea::make('comment')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Toggle::make('status')
-                    ->required(),
-            ]);
+                    Forms\Components\Textarea::make('comment')
+                        ->required()
+                        ->columnSpanFull(),
+                    ])->columnSpan(2),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Rating::make('rating')
+                        ->allowZero(),
+                        Forms\Components\Toggle::make('status')
+                            ->required(),
+                    ])->columnSpan(1)
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('user.first_name')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('book.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('rating')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('status')
-                    ->boolean(),
+                    ->sortable()
+                    ->searchable()
+                    ->limit(40),
+                RatingColumn::make('rating'),
+                Tables\Columns\ToggleColumn::make('status')
+                    ->label('Published'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

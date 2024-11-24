@@ -4,21 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Tags\HasTags;
 
 class Series extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTags;
     protected $fillable = [
         'name',
         'description',
-        'tags',
         'slug',
         'status'
     ];
 
     protected $casts = [
         'status' => 'boolean',
-        'tags' => 'array'
     ];
 
     public function books()

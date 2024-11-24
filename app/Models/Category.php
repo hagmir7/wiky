@@ -4,19 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Tags\HasTags;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTags;
     protected $fillable = [
         "name",
         "slug",
-        "tags",
         "description",
-    ];
-
-    protected $casts = [
-        'tags' => 'array',
     ];
 
     public function books()

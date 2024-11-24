@@ -18,7 +18,6 @@ class CollectionFactory extends Factory
     {
         return [
             'title' => $this->faker->unique()->words(3, true),
-            'image' => $this->faker->imageUrl(800, 400),
             'description' => $this->faker->paragraphs(2, true),
         ];
     }

@@ -15,8 +15,6 @@ class Author extends Model implements HasMedia
         "user_id",
         "full_name",
         "birth",
-        "image",
-        "cover",
         "description",
         "slug",
         "is_verified",
@@ -44,7 +42,7 @@ class Author extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('authors');
-        $this->addMediaCollection('author-cover');
+        $this->addMediaCollection('authors-avatar');
+        $this->addMediaCollection('authors-cover');
     }
 }

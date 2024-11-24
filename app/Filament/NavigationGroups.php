@@ -8,4 +8,5 @@ class NavigationGroups
   const USERS = 'User Management';
   const CATALOG = 'Catalog';
   const TAXONOMY = 'Category Management';
+  const LOCALIZATION = 'Localization Management';
 }

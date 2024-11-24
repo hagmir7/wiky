@@ -23,7 +23,7 @@ class CommentFactory extends Factory
             'collection_id' => Collection::factory(),
             'content' => $this->faker->paragraph(),
             'comment_id' => null,
-            'status' => $this->faker->boolean(90),
+            'status' => $this->faker->randomElement([0,1]),
         ];
     }
 }

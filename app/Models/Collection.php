@@ -15,7 +15,6 @@ class Collection extends Model implements HasMedia
     protected $table = 'collections';
     protected $fillable = [
         "title",
-        "image",
         "description",
     ];
 
@@ -27,7 +26,7 @@ class Collection extends Model implements HasMedia
 
     public function books():BelongsToMany
     {
-        return $this->belongsToMany(Book::class, 'book_collections');
+        return $this->belongsToMany(Book::class, 'book_collection');
     }
 
     public function categories():BelongsToMany
@@ -37,7 +36,7 @@ class Collection extends Model implements HasMedia
 
     public function registerMediaCollection(): void
     {
-        $this->addMediaCollection('collections');
+        $this->addMediaCollection('collections-cover');
     }
 
 }

@@ -9,7 +9,6 @@
     @livewireStyles
 </head>
 <body class="bg-gray-50">
-
     <x-nav />
     @yield('content')
     <x-footer />

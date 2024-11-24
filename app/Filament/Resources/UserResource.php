@@ -12,6 +12,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -77,7 +78,7 @@ class UserResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('avatar')
-                            ->collection('avatars')
+                            ->collection('users-avatar')
                             ->avatar(),
                         Forms\Components\DateTimePicker::make('email_verified_at'),
                         Forms\Components\Select::make('status')
@@ -93,7 +94,9 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('avatar')
+                    SpatieMediaLibraryImageColumn::make('avatar')
+                    ->label('Avatar')
+                    ->collection('users-avatar')
                     ->circular(),
                 Tables\Columns\TextColumn::make('first_name')
                     ->searchable(),

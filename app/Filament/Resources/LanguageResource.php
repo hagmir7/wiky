@@ -19,7 +19,7 @@ class LanguageResource extends Resource
     protected static ?string $model = Language::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-language';
-    protected static ?string $navigationGroup = NavigationGroups::TAXONOMY;
+    protected static ?string $navigationGroup = NavigationGroups::LOCALIZATION;
     public static function form(Form $form): Form
     {
         return $form

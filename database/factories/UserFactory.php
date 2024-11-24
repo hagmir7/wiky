@@ -21,7 +21,6 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'status' => fake()->randomElement(UserStatusEnum::cases())->value,
-            'avatar' => fake()->imageUrl(640, 640, 'people', true, 'avatar'),
         ];
     }
 

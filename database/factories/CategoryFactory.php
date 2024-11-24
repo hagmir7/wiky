@@ -20,7 +20,6 @@ class CategoryFactory extends Factory
         $name = $this->faker->unique()->words(2, true);
         return [
             'name' => $name,
-            'tags' => json_encode($this->faker->words(5)),
             'description' => $this->faker->paragraph(),
             'slug' => Str::slug($name),
         ];
