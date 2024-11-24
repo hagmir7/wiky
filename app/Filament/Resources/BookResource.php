@@ -46,12 +46,15 @@ class BookResource extends Resource
                                 Forms\Components\DatePicker::make('publication_date')
                                     ->native(false)
                                     ->required(),
-
-
-
-                                Forms\Components\Toggle::make('status')
+                                Forms\Components\TextInput::make('isbn')
                                     ->required()
-                                    ->default(true),
+                                    ->label(__("ISBN"))
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('isbn13')
+                                    ->label(__("ISBN13"))
+                                    ->required()
+                                    ->maxLength(255),
                                 Forms\Components\Textarea::make('description')
                                     ->columnSpanFull()
                                     ->required(),
@@ -83,14 +86,13 @@ class BookResource extends Resource
                                     ->searchable()
                                     ->default(null),
 
-                                // ISBN Information
-                                Forms\Components\TextInput::make('isbn')
-                                    ->required()
-                                    ->maxLength(255),
 
-                                Forms\Components\TextInput::make('isbn13')
+                                Forms\Components\Toggle::make('status')
                                     ->required()
-                                    ->maxLength(255),
+                                    ->default(true),
+
+                                // ISBN Information
+
 
 
                             ])

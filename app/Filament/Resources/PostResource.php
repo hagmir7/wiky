@@ -26,32 +26,41 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255)
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'id')
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('tags')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Select::make('book_id')
-                    ->relationship('book', 'name')
-                    ->default(null),
-                Forms\Components\FileUpload::make('image')
-                    ->image(),
-                Forms\Components\Textarea::make('content')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true),
+                Forms\Components\Grid::make(3)
+                    ->schema([
+
+                        Forms\Components\Section::make()
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255),
+                                 Forms\Components\TagsInput::make('tags')
+                                    ->required()
+                                    ->separator(',', 'Enter')
+                                    ->columnSpanFull(),
+
+                                Forms\Components\Textarea::make('description')
+                                    ->required()
+                                    ->columnSpanFull(),
+                                Forms\Components\RichEditor::make('content')
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ])
+                            ->columnSpan(2),
+
+
+                        Forms\Components\Section::make()
+                            ->schema([
+                                Forms\Components\FileUpload::make('image')
+                                    ->image(),
+                                Forms\Components\Select::make('book_id')
+                                    ->relationship('book', 'name')
+                                    ->default(null),
+                            ])->columnSpan(1),
+
+                    ])
+
+
             ]);
     }
 
