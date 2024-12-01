@@ -29,10 +29,20 @@ class CategoryResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
-                            ->maxLength(255),
-                        Forms\Components\TagsInput::make('tags')
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn($state, Forms\Set $set) => $set('slug', Str::slug($state))),
+
+                        Forms\Components\TextInput::make('slug')
+                            ->required()
+                            ->maxLength(255)
+                            ->unique(ignoreRecord: true),
+
+                        Forms\Components\SpatieTagsInput::make('tags')
                             ->separator(',', 'Enter')
-                            ->required(),
+                            ->required()
+                            ->columnSpanFull(),
+                            
                         Forms\Components\Textarea::make('description')
                             ->required()
                             ->columnSpanFull(),

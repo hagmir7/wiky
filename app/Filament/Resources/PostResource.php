@@ -36,7 +36,7 @@ class PostResource extends Resource
                                 Forms\Components\TextInput::make('title')
                                     ->required()
                                     ->maxLength(255),
-                                 Forms\Components\TagsInput::make('tags')
+                                 Forms\Components\SpatieTagsInput::make('tags')
                                     ->required()
                                     ->separator(',', 'Enter')
                                     ->columnSpanFull(),
@@ -57,6 +57,8 @@ class PostResource extends Resource
                                     ->image(),
                                 Forms\Components\Select::make('book_id')
                                     ->relationship('book', 'name')
+                                    ->preload()
+                                    ->searchable()
                                     ->default(null),
                             ])->columnSpan(1),
 

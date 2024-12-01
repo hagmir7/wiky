@@ -82,5 +82,6 @@ class Book extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('books-cover');
+        $this->addMediaCollection('books-file');
     }
 }

@@ -37,8 +37,16 @@ class BookResource extends Resource
                                     ->label('Book Title')
                                     ->required()
                                     ->columnSpanFull()
-                                    ->maxLength(255),
-                                Forms\Components\TagsInput::make('tags')
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn($state, Forms\Set $set) => $set('slug', Str::slug($state))),
+
+                                Forms\Components\TextInput::make('slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(ignoreRecord: true),
+
+                                Forms\Components\SpatieTagsInput::make('tags')
                                     ->required()
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('pages')
@@ -51,12 +59,28 @@ class BookResource extends Resource
                                 Forms\Components\TextInput::make('isbn')
                                     ->required()
                                     ->label(__("ISBN"))
-                                    ->maxLength(255),
+                                    ->maxLength(255)
+                                    ->hintAction(
+                                        Forms\Components\Actions\Action::make('Generate')
+                                            ->color('primary')
+                                            ->size('sm')
+                                            ->action(function (Forms\Set $set) {
+                                                $set('isbn', sprintf('%09dX', random_int(100000000, 999999999)));
+                                            })
+                                    ),
 
                                 Forms\Components\TextInput::make('isbn13')
                                     ->label(__("ISBN13"))
                                     ->required()
-                                    ->maxLength(255),
+                                    ->maxLength(255)
+                                    ->hintAction(
+                                        Forms\Components\Actions\Action::make('Generate')
+                                            ->color('primary')
+                                            ->size('sm')
+                                            ->action(function (Forms\Set $set) {
+                                                $set('isbn13', sprintf('%013d', random_int(1000000000000, 9999999999999)));
+                                            })
+                                    ),
                                 Forms\Components\Textarea::make('description')
                                     ->columnSpanFull()
                                     ->required(),
@@ -71,11 +95,15 @@ class BookResource extends Resource
                         Forms\Components\Section::make()
                             ->schema([
                                 SpatieMediaLibraryFileUpload::make('image')
-                                    ->collection('books')
+                                    ->collection('books-cover')
                                     ->image()
                                     ->required()
                                     ->columnSpanFull(),
-                                Forms\Components\FileUpload::make('file'),
+
+                                SpatieMediaLibraryFileUpload::make('file')
+                                    ->collection('books-file')
+                                    ->acceptedFileTypes(["application/pdf"]),
+
                                 // Authors and Series
                                 Forms\Components\Select::make('user_id')
                                     ->label('User')
@@ -98,67 +126,10 @@ class BookResource extends Resource
                                     ->searchable()
                                     ->default(null),
 
-
                                 Forms\Components\Toggle::make('status')
                                     ->required()
                                     ->default(true),
-
-
-
-                            ])
-                            ->columnSpan(1),
-
-                        // Additional Details (2 columns wide)
-                        Forms\Components\Group::make()
-                            ->schema([
-                                // Tags and Media
-                                Forms\Components\SpatieTagsInput::make('tags')
-                                    ->columnSpanFull(),
-
-                                SpatieMediaLibraryFileUpload::make('image')
-                                    ->collection('books-cover')
-                                    ->image()
-                                    ->imageEditor()
-                                    ->columnSpanFull(),
-
-                                // Book Details
-                                Forms\Components\Grid::make(2)
-                                    ->schema([
-                                        Forms\Components\TextInput::make('pages')
-                                            ->required()
-                                            ->numeric(),
-
-                                        Forms\Components\DatePicker::make('publication_date')
-                                            ->required(),
-                                    ]),
-
-                                Forms\Components\FileUpload::make('file')
-                                    ->label("Book file")
-                                    ->disk("public")
-                                    ->directory("books")
-                                    ->visibility("public")
-                                    ->acceptedFileTypes(["application/pdf"])
-                                    ->maxSize(49152)
-                                    ->maxFiles(1)
-                                    ->downloadable()
-                                    ->getUploadedFileNameForStorageUsing(
-                                        fn(
-                                            TemporaryUploadedFile $file
-                                        ): string => (string) str(
-                                            $file->getClientOriginalName()
-                                        )->prepend(now()->timestamp . "-")
-                                    )
-                                    ->columnSpan([
-                                        "sm" => 1,
-                                        "lg" => 2,
-                                    ]),
-
-                                Forms\Components\Toggle::make('status')
-                                    ->label('Published')
-                                    ->required()
-                                    ->default(true),
-                            ])
-                            ->columnSpan(2),
+                            ])->columnSpan(1),
                     ])
                     ->columns(3)
             ]);
