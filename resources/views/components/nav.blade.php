@@ -69,7 +69,7 @@
 
             <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center space-x-6">
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Books</a>
+                <a href="{{route('books.home')}}" class="text-gray-700 hover:text-[#00BFB3]">Books</a>
                 <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Authers</a>
                 <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Collections</a>
                 <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Genres</a>

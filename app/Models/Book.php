@@ -84,4 +84,9 @@ class Book extends Model implements HasMedia
         $this->addMediaCollection('books-cover');
         $this->addMediaCollection('books-file');
     }
+
+    public function scopePublished($query)
+    {
+        return $query->whereNotNull('published_date')->where('published_date', '<=', now());
+    }
 }
