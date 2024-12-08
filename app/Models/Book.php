@@ -24,7 +24,7 @@ class Book extends Model implements HasMedia
         'content',
         'isbn',
         'isbn13',
-        'publication_date',
+        'published_date',
         'pages',
         'file',
         'slug',
@@ -32,7 +32,7 @@ class Book extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'publication_date' => 'date',
+        'published_date' => 'date',
         'status' => 'boolean',
         'pages' => 'integer'
     ];

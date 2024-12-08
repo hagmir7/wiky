@@ -53,8 +53,9 @@ class BookResource extends Resource
                                     ->required()
                                     ->numeric(),
 
-                                Forms\Components\DatePicker::make('publication_date')
+                                Forms\Components\DatePicker::make('published_date')
                                     ->native(false)
+                                    ->default(now())
                                     ->required(),
                                 Forms\Components\TextInput::make('isbn')
                                     ->required()
@@ -84,10 +85,24 @@ class BookResource extends Resource
                                 Forms\Components\Textarea::make('description')
                                     ->columnSpanFull()
                                     ->required(),
-                                Forms\Components\MarkdownEditor::make('content')
-                                    ->required()
-                                    ->columnSpanFull(),
-
+                                    Forms\Components\Group::make()
+                                    ->schema([
+                                        Forms\Components\Toggle::make('use_markdown')
+                                            ->label('Use Markdown Editor')
+                                            ->live(),
+                                        
+                                        Forms\Components\MarkdownEditor::make('content')
+                                            ->label('Markdown Content')
+                                            ->required(fn ($get) => $get('use_markdown') === true)
+                                            ->columnSpanFull()
+                                            ->visible(fn ($get) => $get('use_markdown') === true),
+                                        
+                                        Forms\Components\RichEditor::make('content')
+                                            ->label('Rich Text Content')
+                                            ->required(fn ($get) => $get('use_markdown') === false)
+                                            ->columnSpanFull()
+                                            ->visible(fn ($get) => $get('use_markdown') === false)
+                                    ])->columnSpanFull(),
                             ])
                             ->columns(2)
                             ->columnSpan(2),
@@ -155,7 +170,7 @@ class BookResource extends Resource
                     ->searchable(),
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('books-cover'),
-                Tables\Columns\TextColumn::make('publication_date')
+                Tables\Columns\TextColumn::make('published_date')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pages')

@@ -30,7 +30,7 @@ class BookFactory extends Factory
             'content' => $this->faker->paragraphs(10, true),
             'isbn' => $this->faker->isbn10(),
             'isbn13' => $this->faker->isbn13(),
-            'publication_date' => $this->faker->dateTimeBetween('-30 years', 'now'),
+            'published_date' => $this->faker->dateTimeBetween('-30 years', 'now'),
             'pages' => $this->faker->numberBetween(50, 1000),
             'file' => $this->faker->boolean(70) ? 'books/sample.pdf' : null,
             'slug' => Str::slug($name),

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('isbn');
             $table->string('isbn13');
-            $table->date('publication_date');
+            $table->date('published_date');
             $table->integer('pages');
             $table->string('file')->nullable();
             $table->string('slug')->unique();
