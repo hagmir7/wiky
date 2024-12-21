@@ -7,7 +7,7 @@
             <div class="hidden lg:flex justify-between items-center py-1">
                 <!-- Left Links -->
                 <div class="flex space-x-6">
-                    <a href="#" class="hover:text-gray-200 text-sm font-semibold">BLOG</a>
+                    <a href="{{ route('blogs.list') }}" class="hover:text-gray-200 text-sm font-semibold">BLOG</a>
                     <a href="#" class="hover:text-gray-200 text-sm font-semibold">GUIDES</a>
                     <a href="#" class="hover:text-gray-200 text-sm font-semibold">PROMOTIONS</a>
                     <a href="#" class="hover:text-gray-200 text-sm font-semibold">ABOUT US</a>
@@ -56,7 +56,7 @@
         <div class="flex justify-between items-center py-2">
             <!-- Logo -->
             <div class="flex items-center">
-                <img src="wiky.png" alt="Wiky Book" class="h-12">
+                <img src="{{asset('wiky.png')}}" alt="Wiky Book" class="h-12">
             </div>
 
             <!-- Mobile Menu Button -->
@@ -102,7 +102,7 @@
                 <a href="#" class="text-gray-700 hover:text-[#00BFB3]">MANAGED SERVICES</a>
                 <a href="#" class="text-gray-700 hover:text-[#00BFB3]">SSL</a>
                 <div class="pt-4 border-t border-gray-200">
-                    <a href="#" class="block text-gray-700 hover:text-[#00BFB3]">BLOG</a>
+                    <a href="{{ route('blogs.list') }}" class="block text-gray-700 hover:text-[#00BFB3]">BLOG</a>
                     <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">GUIDES</a>
                     <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">PROMOTIONS</a>
                     <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">ABOUT US</a>
