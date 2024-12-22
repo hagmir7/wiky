@@ -3,7 +3,7 @@
 @section('content')
 <section class="max-w-7xl mx-auto px-4 py-6">
     <h1 class="max-w-4xl mx-auto text-2xl md:text-4xl tracking-wide text-center font-bold text-gray-800 py-6">
-        Wecima - Books Summaries, Reviews, and Author Insights
+        {{ $post->title }}
     </h1>
 
     <div class="w-full flex flex-col items-center justify-center">
@@ -14,7 +14,7 @@
                     d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
 
-            <p class="text-sm font-semibold text-gray-400"> Dec 19, 2024 </p>
+            <p class="text-sm font-semibold text-gray-400">{{ $post->created_at->format('M d, Y') }} </p>
         </div>
 
 
@@ -68,26 +68,19 @@
 
     <div class="w-full max-w-4xl mx-auto py-6">
         <div class="w-full">
-            <img src="https://wecima.uk/storage/01JFG9FW47KBG6R4DS0XJJTNXW.webp" alt="blog image"
+            <img src="{{ $post->getCoverUrl() }}" alt="blog image"
                 class="w-full object-cover rounded-lg shadow-lg">
         </div>
 
         <div class="text-gray-500">
             <p class="text-lg py-6">
-                Dathan Auerbach’s novel Penpal is an unsettling, psychological horror story that masterfully intertwines
-                childhood innocence with dark suspense. The novel, which originated from a series of short stories on
-                Reddit’s “NoSleep” forum, delves into themes of memory, trauma, and the sinister undercurrents that can
-                flow through ordinary life.
+                {!! $post->description !!}
             </p>
 
             {{-- content --}}
-            <h2 class="text-xl md:text-2xl font-bold text-gray-800 py-3">Plot Overview</h2>
-            <p class="text-lg">
-                The story follows the protagonist, who remains unnamed throughout the novel, as he recounts a series of
-                eerie events that occurred during his childhood. The narrative unfolds in a nonlinear fashion, with each
-                chapter revealing a new piece of the puzzle. The protagonist’s memories are fragmented and disjointed,
-                mirroring the fractured nature of his psyche.
-            </p>
+            <div class="post-text">
+                {!! $post->content !!}
+            </div>
         </div>
     </div>
 
