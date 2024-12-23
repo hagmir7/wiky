@@ -3,43 +3,79 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PostFilter extends Component
 {
-    public $search = '';
-    protected $queryString = ['search'];
+    use WithPagination;
 
-    public function updatingSearch()
+    #[Url]
+    public string $search = '';
+
+    public int $perPage = 6;
+
+    protected $listeners = ['refreshPosts' => '$refresh'];
+
+    public function updating(string $name): void
     {
+        if ($name === 'search') {
+            $this->resetPage();
+            Cache::forget($this->getCacheKey());
+        }
+    }
+
+    protected function getCacheKey(): string
+    {
+        return "posts.{$this->search}.{$this->getPage()}";
+    }
+
+    public function clearFilters(): void
+    {
+        $this->reset(['search', 'user', 'category']);
         $this->resetPage();
     }
 
-    public function test()
+    #[Computed]
+    public function posts(): mixed
     {
-        // Handle search button click if needed
+        return Cache::remember(
+            $this->getCacheKey(),
+            now()->addMinutes(5),
+            fn () => $this->getPostsQuery()->paginate($this->perPage)
+        );
     }
-    public function render()
-    {
-        $posts = Post::query()
-            ->with(['user', 'book', 'categories', 'media'])
-            ->when($this->search, function ($query) {
-                $query->where(function ($q) {
-                    $q->where('title', 'like', '%' . $this->search . '%')
-                        ->orWhere('description', 'like', '%' . $this->search . '%')
-                        ->orWhereHas('book', function ($q) {
-                            $q->where('title', 'like', '%' . $this->search . '%');
-                        })
-                        ->orWhereHas('categories', function ($q) {
-                            $q->where('name', 'like', '%' . $this->search . '%');
-                        });
-                });
-            })
-            ->latest()
-            ->paginate(6);
 
+    protected function getPostsQuery(): Builder
+    {
+        $query = Post::query()
+            ->with(['user', 'book', 'categories', 'media']);
+
+        if ($this->search) {
+            $searchTerm = '%' . trim($this->search) . '%';
+            $query->where(function (Builder $q) use ($searchTerm) {
+                $q->whereHas('book', function (Builder $q) use ($searchTerm) {
+                    $q->where('title', 'like', $searchTerm)
+                        ->orWhere('author', 'like', $searchTerm);
+                })
+                    ->orWhereHas('categories', function (Builder $q) use ($searchTerm) {
+                        $q->where('name', 'like', $searchTerm);
+                    });
+            });
+        }
+
+        return $query->latest();
+    }
+
+    public function render(): View
+    {
         return view('livewire.post-filter', [
-            'posts' => $posts
+            'posts' => $this->posts,
         ]);
     }
 }
