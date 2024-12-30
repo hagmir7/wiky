@@ -20,58 +20,46 @@ class PostFilter extends Component
 
     public int $perPage = 6;
 
-    protected $listeners = ['refreshPosts' => '$refresh'];
-
-    public function updating(string $name): void
+    /**
+     * Reset pagination when updating the search field.
+     */
+    public function updatingSearch(): void
     {
-        if ($name === 'search') {
-            $this->resetPage();
-            Cache::forget($this->getCacheKey());
-        }
-    }
-
-    protected function getCacheKey(): string
-    {
-        return "posts.{$this->search}.{$this->getPage()}";
-    }
-
-    public function clearFilters(): void
-    {
-        $this->reset(['search', 'user', 'category']);
         $this->resetPage();
     }
 
+    /**
+     * Clear all filters and reset pagination.
+     */
+    public function clearFilters(): void
+    {
+        $this->reset(['search']);
+        $this->resetPage();
+    }
+
+    /**
+     * Get filtered posts.
+     */
     #[Computed]
     public function posts(): mixed
     {
-        return Cache::remember(
-            $this->getCacheKey(),
-            now()->addMinutes(5),
-            fn () => $this->getPostsQuery()->paginate($this->perPage)
-        );
+        return Post::query()
+            ->with(['user', 'book', 'categories'])
+            ->when($this->search, function (Builder $query) {
+                $searchTerm = '%' . trim($this->search) . '%';
+                $query->where(function (Builder $q) use ($searchTerm) {
+                    $q->whereHas('book', fn (Builder $q) => $q->where('name', 'like', $searchTerm)
+                        ->orWhereHas('author', fn (Builder $q) => $q->where('full_name', 'like', $searchTerm)))
+                        ->orWhereHas('categories', fn (Builder $q) => $q->where('name', 'like', $searchTerm));
+                });
+            })
+            ->latest()
+            ->paginate($this->perPage);
     }
 
-    protected function getPostsQuery(): Builder
-    {
-        $query = Post::query()
-            ->with(['user', 'book', 'categories', 'media']);
-
-        if ($this->search) {
-            $searchTerm = '%' . trim($this->search) . '%';
-            $query->where(function (Builder $q) use ($searchTerm) {
-                $q->whereHas('book', function (Builder $q) use ($searchTerm) {
-                    $q->where('title', 'like', $searchTerm)
-                        ->orWhere('author', 'like', $searchTerm);
-                })
-                    ->orWhereHas('categories', function (Builder $q) use ($searchTerm) {
-                        $q->where('name', 'like', $searchTerm);
-                    });
-            });
-        }
-
-        return $query->latest();
-    }
-
+    /**
+     * Render the Livewire component view.
+     */
     public function render(): View
     {
         return view('livewire.post-filter', [
