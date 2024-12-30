@@ -53,7 +53,8 @@ class PostResource extends Resource
 
                         Forms\Components\Section::make()
                             ->schema([
-                                Forms\Components\FileUpload::make('image')
+                                Forms\Components\SpatieMediaLibraryFileUpload::make('image')
+                                    ->collection('posts-cover')
                                     ->image(),
                                 Forms\Components\Select::make('book_id')
                                     ->relationship('book', 'name')
@@ -74,19 +75,26 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user.id')
+
+                Tables\Columns\TextColumn::make('user.first_name')
                     ->numeric()
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('book.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->maxLength(30),
+
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('posts-cover'),
+
                 Tables\Columns\SpatieTagsColumn::make('tags'),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

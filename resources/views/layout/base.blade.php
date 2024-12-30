@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head::styles')
     @stack('head::scripts')
-    
+
     @stack('head::end')
     @livewireStyles
 </head>
@@ -19,6 +19,7 @@
     @vite('resources/js/app.js')
     @stack('body::scripts')
 
+    @livewireScripts
     @livewireScriptConfig
     @stack('body::end')
 </body>
