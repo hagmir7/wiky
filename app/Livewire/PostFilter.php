@@ -15,7 +15,7 @@ class PostFilter extends Component
 {
     use WithPagination;
 
-    #[Url]
+    #[Url(history: true)]
     public string $search = '';
 
     public int $perPage = 6;
@@ -33,7 +33,7 @@ class PostFilter extends Component
      */
     public function clearFilters(): void
     {
-        $this->reset(['search']);
+        $this->search = '';
         $this->resetPage();
     }
 
@@ -41,16 +41,23 @@ class PostFilter extends Component
      * Get filtered posts.
      */
     #[Computed]
-    public function posts(): mixed
+    public function posts()
     {
         return Post::query()
-            ->with(['user', 'book', 'categories'])
+            ->with(['user', 'book', 'categories', 'media'])
             ->when($this->search, function (Builder $query) {
                 $searchTerm = '%' . trim($this->search) . '%';
-                $query->where(function (Builder $q) use ($searchTerm) {
-                    $q->whereHas('book', fn (Builder $q) => $q->where('name', 'like', $searchTerm)
-                        ->orWhereHas('author', fn (Builder $q) => $q->where('full_name', 'like', $searchTerm)))
-                        ->orWhereHas('categories', fn (Builder $q) => $q->where('name', 'like', $searchTerm));
+
+                return $query->where(function (Builder $q) use ($searchTerm) {
+                    $q->whereHas('book', function (Builder $q) use ($searchTerm) {
+                        $q->where('name', 'like', $searchTerm)
+                            ->orWhereHas('author', function (Builder $q) use ($searchTerm) {
+                                $q->where('full_name', 'like', $searchTerm);
+                            });
+                    })
+                        ->orWhereHas('categories', function (Builder $q) use ($searchTerm) {
+                            $q->where('name', 'like', $searchTerm);
+                        });
                 });
             })
             ->latest()
@@ -62,8 +69,6 @@ class PostFilter extends Component
      */
     public function render(): View
     {
-        return view('livewire.post-filter', [
-            'posts' => $this->posts,
-        ]);
+        return view('livewire.post-filter');
     }
 }
