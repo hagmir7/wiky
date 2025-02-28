@@ -68,7 +68,7 @@
 
     <div class="w-full max-w-4xl mx-auto py-6">
         <div class="w-full">
-            <img src="{{ $post->getCoverUrl() }}" alt="blog image"
+            <img src="{{ $post->getFirstMediaUrl('posts-cover') }}" alt="blog image"
                 class="w-full object-cover rounded-lg shadow-lg">
         </div>
 

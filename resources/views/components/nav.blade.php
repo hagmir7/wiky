@@ -1,7 +1,7 @@
 <!-- Top Navigation Bar -->
 <nav class="bg-white shadow-md">
     <!-- Top Teal Bar -->
-    <div class="bg-[#00BFB3] text-white">
+    <div class="bg-primary-500 text-white">
         <div class="container mx-auto px-4">
             <!-- Top Bar Content -->
             <div class="hidden lg:flex justify-between items-center py-1">
@@ -69,11 +69,11 @@
 
             <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center space-x-6">
-                <a href="{{route('books.home')}}" class="text-gray-700 hover:text-[#00BFB3]">Books</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Authers</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Collections</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Genres</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">Quotes</a>
+                <a href="{{route('books.home')}}" class="text-gray-700 hover:text-primary-500">Books</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">Authers</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">Collections</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">Genres</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">Quotes</a>
             </div>
 
             <!-- User and Cart Icons -->
@@ -93,21 +93,21 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden pb-4">
             <div class="flex flex-col space-y-3">
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">DOMAIN NAME</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">WEB HOSTING</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">CLOUD MOROCCO</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">NINDOBUILDER</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">EMAIL</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">SERVERS</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">MANAGED SERVICES</a>
-                <a href="#" class="text-gray-700 hover:text-[#00BFB3]">SSL</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">DOMAIN NAME</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">WEB HOSTING</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">CLOUD MOROCCO</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">NINDOBUILDER</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">EMAIL</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">SERVERS</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">MANAGED SERVICES</a>
+                <a href="#" class="text-gray-700 hover:text-primary-500">SSL</a>
                 <div class="pt-4 border-t border-gray-200">
-                    <a href="{{ route('blogs.list') }}" class="block text-gray-700 hover:text-[#00BFB3]">BLOG</a>
-                    <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">GUIDES</a>
-                    <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">PROMOTIONS</a>
-                    <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">ABOUT US</a>
-                    <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">CONTACT</a>
-                    <a href="#" class="block text-gray-700 hover:text-[#00BFB3] mt-3">REQUEST A QUOTE</a>
+                    <a href="{{ route('blogs.list') }}" class="block text-gray-700 hover:text-primary-500">BLOG</a>
+                    <a href="#" class="block text-gray-700 hover:text-primary-500 mt-3">GUIDES</a>
+                    <a href="#" class="block text-gray-700 hover:text-primary-500 mt-3">PROMOTIONS</a>
+                    <a href="#" class="block text-gray-700 hover:text-primary-500 mt-3">ABOUT US</a>
+                    <a href="#" class="block text-gray-700 hover:text-primary-500 mt-3">CONTACT</a>
+                    <a href="#" class="block text-gray-700 hover:text-primary-500 mt-3">REQUEST A QUOTE</a>
                 </div>
             </div>
         </div>

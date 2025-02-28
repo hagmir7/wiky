@@ -38,11 +38,7 @@ class Post extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('posts-cover')
-            ->singleFile();
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/images/default-post-cover.webp'));
     }
-
-    public function getCoverUrl(): string
-{
-    return $this->getFirstMediaUrl('posts-cover') ?: 'https://wecima.uk/storage/01JFG9FW47KBG6R4DS0XJJTNXW.webp';
-}
 }
