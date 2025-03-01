@@ -88,15 +88,6 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('user.first_name')
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('book.name')
-                    ->sortable()
-                    ->limit(30),
-
-                SpatieMediaLibraryImageColumn::make('image')
-                    ->collection('posts-cover'),
-
-                Tables\Columns\SpatieTagsColumn::make('tags'),
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

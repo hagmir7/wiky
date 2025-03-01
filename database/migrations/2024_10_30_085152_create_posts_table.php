@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('slug')->unique();
             $table->integer('reading_time')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->softDeletes();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
