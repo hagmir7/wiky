@@ -40,4 +40,9 @@ class Post extends Model implements HasMedia
         $this->addMediaCollection('posts-cover')
             ->singleFile();
     }
+
+    public function getCoverUrl(): string
+{
+    return $this->getFirstMediaUrl('posts-cover') ?: 'https://wecima.uk/storage/01JFG9FW47KBG6R4DS0XJJTNXW.webp';
+}
 }
