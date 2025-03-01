@@ -71,7 +71,7 @@
         </div>
 
         <div class="text-center mt-8">
-            <p>&copy; 2024 Wikybook. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} Wikybook. All rights reserved.</p>
         </div>
     </div>
 </footer>

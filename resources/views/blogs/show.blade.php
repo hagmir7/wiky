@@ -2,6 +2,26 @@
 
 @section('content')
 <section class="max-w-7xl mx-auto px-4 py-6">
+    <div>
+        {{---- Breadcrumbs --}}
+        <div class="max-w-4xl mx-auto pr-4 pt-8 pb-0">
+            <div class="flex items-center">
+                <nav class="" aria-label="Breadcrumb">
+                    <ol class="flex space-x-1">
+                        <li>
+                            <a href="{{  route('blogs.list') }}" wire:navigate class="lg:hover:text-gray-700 lg:hover:underline lg:decoration-slice">Blogs</a>
+                        </li>
+                        <li>
+                            <span class="text-gray-400">/</span>
+                        </li>
+                        <li>
+                            <span class="text-gray-700" aria-current="page">{{$post->title}}</span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+    </div>
+
     <h1 class="max-w-4xl mx-auto text-2xl md:text-4xl tracking-wide text-center font-bold text-gray-800 py-6">
         {{ $post->title }}
     </h1>
@@ -64,6 +84,7 @@
                     </svg>
                 </a>
             </li>
+        </ul>
     </div>
 
     <div class="w-full max-w-4xl mx-auto py-6">
