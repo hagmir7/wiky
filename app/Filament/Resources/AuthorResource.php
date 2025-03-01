@@ -29,58 +29,50 @@ class AuthorResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make()
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        SpatieMediaLibraryFileUpload::make('image')
-                            ->collection('authors')
-                            ->alignCenter()
-                            ->label(false)
-                            ->avatar(),
-                        SpatieMediaLibraryFileUpload::make('cover')
-                            ->collection('author-cover')
-                            ->image(),
-
-                        Forms\Components\TextInput::make('full_name')
-                            ->required()
-                            ->maxLength(255)
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-
-                        Forms\Components\Textarea::make('description')
-                            ->required()
-                            ->rows(6)
-                            ->columnSpanFull(),
-                    ])->columnSpan(2),
                         Forms\Components\Section::make()
-                            ->schema([Forms\Components\Select::make('user_id')
-                            ->relationship('user', 'first_name')
-                            ->preload()
-                            ->searchable()
-                            ->default(null),
-                        Forms\Components\DatePicker::make('birth')
-                            ->required()
-                            ->native(false)
-                            ->closeOnDateSelection(),
-                        Forms\Components\Textarea::make('description')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                    ])->columnSpan(2),
-                Forms\Components\Section::make()
-                    ->schema([
-                        Forms\Components\Toggle::make('is_verified')
-                            ->required(),
-                        Forms\Components\Select::make('country_id')
-                            ->relationship('country', 'name')
-                            ->preload()
-                            ->searchable()
-                            ->required(),
-                        Forms\Components\Toggle::make('is_verified')
-                            ->required(),
-                    ])->columnSpan(1)
+                            ->schema([
+                                Forms\Components\TextInput::make('full_name')
+                                    ->label(__("Author name"))
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\DatePicker::make('birth')
+                                    ->label(__("Birth"))
+                                    ->native(false)
+                                    ->maxDate(now()->subYear(20)),
+                                Forms\Components\Select::make('country_id')
+                                    ->searchable()
+                                    ->preload()
+                                    ->label(__("Country"))
+                                    ->relationship('country', 'name'),
+                                Forms\Components\Toggle::make('is_verified')
+                                    ->inline(false)
+                                    ->label(__("Verified")),
+                                Forms\Components\RichEditor::make('description')
+                                    ->label(__("Description"))
+                                    ->columnSpanFull(),
+
+                            ])
+                            ->columns(2)
+                            ->columnSpan(2),
+                        Forms\Components\Section::make()
+                            ->schema([
+                                Forms\Components\FileUpload::make('image')
+                                    ->image()
+                                    ->avatar()
+                                    ->columnSpanFull()
+                                    ->label(false)
+                                    ->alignCenter(),
+                                SpatieMediaLibraryFileUpload::make('cover')
+                                    ->collection('author-cover')
+                                    ->columnSpanFull()
+                                    ->label(false)
+                                    ->image(),
+
+                            ])
+                            ->columnSpan(1),
+                    ]),
             ])->columns(3);
     }
 

@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('image')->nullable();
             $table->string('full_name')->unique();
-            $table->date('birth');
-            $table->text('description');
+            $table->date('birth')->nullable();
+            $table->text('description')->nullable();
             $table->string('slug')->unique();
-            $table->boolean('is_verified');
-            $table->foreignId('country_id')->constrained();
+            $table->boolean('is_verified')->default(false);
+            $table->foreignId('country_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 
 class Book extends Model implements HasMedia
@@ -23,8 +24,10 @@ class Book extends Model implements HasMedia
         'description',
         'content',
         'isbn',
+        'keywords',
+        'image',
         'isbn13',
-        'published_date',
+        'publication_date',
         'pages',
         'file',
         'slug',
@@ -32,10 +35,25 @@ class Book extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'published_date' => 'date',
+        'publication_date' => 'date',
         'status' => 'boolean',
-        'pages' => 'integer'
+        'pages' => 'integer',
+        'keywords' => 'array',
     ];
+
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->slugsShouldBeNoLongerThan(50)
+            ->doNotGenerateSlugsOnUpdate()
+            ->saveSlugsTo('slug');
+    }
+
+    public function language(){
+        return $this->belongsTo(language::class);
+    }
 
 
     public function save_book(): MorphOne
@@ -62,11 +80,6 @@ class Book extends Model implements HasMedia
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'book_category');
-    }
-
-    public function collections(): BelongsToMany
-    {
-        return $this->belongsToMany(Collection::class, 'book_collection');
     }
 
     public function reviews(): HasMany
