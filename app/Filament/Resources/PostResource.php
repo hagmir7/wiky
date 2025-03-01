@@ -36,10 +36,18 @@ class PostResource extends Resource
                                 Forms\Components\TextInput::make('title')
                                     ->required()
                                     ->maxLength(255),
-                                 Forms\Components\SpatieTagsInput::make('tags')
+                                Forms\Components\TagsInput::make('tags')
+                                    ->color('info')
+                                    ->label(__("Keywords"))
+                                    ->placeholder(__("New keyword"))
+                                    ->separator(',')
+                                    ->splitKeys([',', 'Enter', '،'])
                                     ->required()
-                                    ->separator(',', 'Enter')
-                                    ->columnSpanFull(),
+                                    ->reorderable()
+                                    ->nestedRecursiveRules([
+                                        'min:3',
+                                        'max:100',
+                                    ]),
 
                                 Forms\Components\Textarea::make('description')
                                     ->rows(3)

@@ -10,9 +10,7 @@
             </div>
 
             <!-- Input Field -->
-            <input type="text" wire:model.live.throttle.500ms="search"
-                   class="w-full pl-14 pr-10 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                   placeholder="Book, Author, or Category...">
+            <input type="text" wire:model.live.throttle.500ms="search" class="w-full pl-14 pr-10 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Book, Author, or Category...">
         </div>
     </div>
 
