@@ -17,8 +17,13 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\User::class);
             $table->text('description');
             $table->foreignId('book_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('tags')->nullable();
             $table->longText('content');
             $table->string('slug')->unique();
+            $table->integer('reading_time')->nullable();
+            $table->boolean('status')->default(true);
+            $table->softDeletes();
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

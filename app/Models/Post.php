@@ -20,6 +20,10 @@ class Post extends Model implements HasMedia
         'book_id',
         'content',
         'slug',
+        'tags',
+        'reading_time',
+        'status',
+        'deleted_by',
     ];
 
     public function user():BelongsTo

@@ -18,7 +18,7 @@ class PostFilter extends Component
     #[Url]
     public string $search = '';
 
-    public int $perPage = 6;
+    public int $perPage = 12;
 
     /**
      * Reset pagination when updating the search field.
@@ -35,6 +35,12 @@ class PostFilter extends Component
     {
         $this->reset(['search']);
         $this->resetPage();
+    }
+
+
+    public function loadMore()
+    {
+        $this->perPage += 12;
     }
 
     /**

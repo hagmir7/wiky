@@ -42,6 +42,7 @@ class PostResource extends Resource
                                     ->columnSpanFull(),
 
                                 Forms\Components\Textarea::make('description')
+                                    ->rows(3)
                                     ->required()
                                     ->columnSpanFull(),
                                 Forms\Components\RichEditor::make('content')
@@ -82,8 +83,7 @@ class PostResource extends Resource
 
                 Tables\Columns\TextColumn::make('book.name')
                     ->numeric()
-                    ->sortable()
-                    ->maxLength(30),
+                    ->sortable(),
 
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('posts-cover'),
