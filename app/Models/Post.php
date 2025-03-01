@@ -39,6 +39,11 @@ class Post extends Model implements HasMedia
         return $this->belongsToMany(Category::class, 'post_categories');
     }
 
+    public function getCoverUrl()
+    {
+        return asset('storage/' . $this->cover_image);
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('posts-cover')
