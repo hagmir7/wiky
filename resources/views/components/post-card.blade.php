@@ -1,13 +1,13 @@
 @props(['post'])
 
-<div
-    class="bg-white shadow-sm rounded-lg overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+<div class="bg-white shadow-sm rounded-lg overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
     <a href="{{ route('blogs.show', $post->slug) }}" class="block">
         <div class="relative">
-            <img class="w-full h-56 object-cover object-center" src="{{ $post->getCoverUrl() }}"
-                alt="{{ $post->title }}">
-            <div
-                class="absolute bottom-0 left-0 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs px-3 py-1 m-2 rounded-full">
+            <img class="w-full h-56 object-cover object-center"
+                src="{{ $post->getMedia('posts-cover')->first()?->getUrl() }}" alt="{{ $post->title }}">
+
+            <div class="absolute bottom-0 left-0 bg-gradient-to-r from-blue-500 to-purple-500
+                        text-white text-xs px-3 py-1 m-2 rounded-full">
                 {{ $post->category->name ?? 'Uncategorized' }}
             </div>
         </div>
