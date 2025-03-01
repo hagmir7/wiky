@@ -81,7 +81,7 @@
         <div class="max-w-4xl mx-auto">
             <article class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="relative">
-                    <img src="{{ $post->getMedia('posts-cover')->first()->getUrl() }}" alt="{{ $post->title }}"
+                    <img src="{{ $post->getMedia('posts-cover')->first()?->getUrl() }}" alt="{{ $post->title }}"
                         class="w-full h-80 md:h-[28rem] object-cover zoom-img">
 
                     @if(isset($post->category))
@@ -230,7 +230,7 @@
                             @foreach($posts ?? [] as $post)
                             <a href="{{ route('blogs.show', $post) }}" class="group">
                                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                                    <img src="{{ optional($post->getMedia('posts-cover')->first())->getUrl() ?? asset('default-image.jpg') }}"
+                                    <img src="{{ optional($post->getMedia('posts-cover')->first())?->getUrl() ?? asset('default-image.jpg') }}"
                                         alt="{{ $post->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
                                     <div class="p-2 mt-0 pt-0">
                                         <h3 class="font-semibold text-gray-800 text-lg group-hover:text-blue-600 transition mb-2">
