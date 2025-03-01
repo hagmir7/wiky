@@ -15,10 +15,14 @@ class PostFilter extends Component
 {
     use WithPagination;
 
-    #[Url]
-    public string $search = '';
+    #[Url(as: 'search')]
+    public $search = '';
 
+<<<<<<< HEAD
     public int $perPage = 12;
+=======
+    public int $perPage = 9;
+>>>>>>> a7817f9915169be23424b43389a890a5d0497325
 
     /**
      * Reset pagination when updating the search field.
@@ -33,7 +37,7 @@ class PostFilter extends Component
      */
     public function clearFilters(): void
     {
-        $this->reset(['search']);
+        $this->reset('search');
         $this->resetPage();
     }
 
@@ -47,29 +51,36 @@ class PostFilter extends Component
      * Get filtered posts.
      */
     #[Computed]
-    public function posts(): mixed
+    public function posts()
     {
+        sleep(1);
+
+        $searchTerm = '%' . trim(htmlspecialchars($this->search)) . '%';
+
         return Post::query()
-            ->with(['user', 'book', 'categories'])
-            ->when($this->search, function (Builder $query) {
-                $searchTerm = '%' . trim($this->search) . '%';
-                $query->where(function (Builder $q) use ($searchTerm) {
-                    $q->whereHas('book', fn (Builder $q) => $q->where('name', 'like', $searchTerm)
-                        ->orWhereHas('author', fn (Builder $q) => $q->where('full_name', 'like', $searchTerm)))
-                        ->orWhereHas('categories', fn (Builder $q) => $q->where('name', 'like', $searchTerm));
-                });
+            ->with(['user', 'book', 'categories', 'media'])
+            ->when($this->search, function (Builder $query) use ($searchTerm) {
+                $query->where('title', 'like', $searchTerm)
+                ->orWhereHas('book', function (Builder $q) use ($searchTerm) {
+                    $q->where('name', 'like', $searchTerm)
+                        ->orWhereHas('author', function (Builder $q) use ($searchTerm) {
+                            $q->where('full_name', 'like', $searchTerm);
+                        });
+                })
+                    ->orWhereHas('categories', function (Builder $q) use ($searchTerm) {
+                        $q->where('name', 'like', $searchTerm);
+                    });
             })
             ->latest()
             ->paginate($this->perPage);
     }
+
 
     /**
      * Render the Livewire component view.
      */
     public function render(): View
     {
-        return view('livewire.post-filter', [
-            'posts' => $this->posts,
-        ]);
+        return view('livewire.post-filter');
     }
 }

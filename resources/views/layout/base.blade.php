@@ -10,17 +10,17 @@
     @stack('head::scripts')
 
     @stack('head::end')
-    @livewireStyles
 </head>
 <body class="bg-gray-50">
     <x-nav />
-    @yield('content')
+
+    <main class="mt-16 lg:mt-24">
+        @yield('content')
+    </main>
+
     <x-footer />
-    @vite('resources/js/app.js')
     @stack('body::scripts')
 
-    @livewireScripts
-    @livewireScriptConfig
     @stack('body::end')
 </body>
 </html>

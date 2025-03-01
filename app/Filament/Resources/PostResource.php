@@ -78,12 +78,11 @@ class PostResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('user.first_name')
-                    ->numeric()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('book.name')
-                    ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->limit(30),
 
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('posts-cover'),
