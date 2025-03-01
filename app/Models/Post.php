@@ -50,4 +50,5 @@ class Post extends Model implements HasMedia
             ->singleFile()
             ->useFallbackUrl(asset('assets/images/default-post-cover.webp'));
     }
+
 }
