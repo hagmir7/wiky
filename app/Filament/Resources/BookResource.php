@@ -90,13 +90,13 @@ class BookResource extends Resource
                                         Forms\Components\Toggle::make('use_markdown')
                                             ->label('Use Markdown Editor')
                                             ->live(),
-                                        
+
                                         Forms\Components\MarkdownEditor::make('content')
                                             ->label('Markdown Content')
                                             ->required(fn ($get) => $get('use_markdown') === true)
                                             ->columnSpanFull()
                                             ->visible(fn ($get) => $get('use_markdown') === true),
-                                        
+
                                         Forms\Components\RichEditor::make('content')
                                             ->label('Rich Text Content')
                                             ->required(fn ($get) => $get('use_markdown') === false)
@@ -189,7 +189,7 @@ class BookResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

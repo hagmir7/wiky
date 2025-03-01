@@ -4,9 +4,7 @@ use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('/books')->group(function () {
     Route::get('/', [BookController::class, 'index'])->name('books.home');

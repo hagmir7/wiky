@@ -7,7 +7,7 @@
             <div class="pt-[140%] sm:pt-0 sm:h-full group/image">
                 <img src="https://facepy.com/media/books/PNG/2024-11-01/b2eefc450c6343d78c3d33879b6eb475.png" alt="Impossible to Forget"
                     class="w-full h-full object-cover transition-all duration-300 cursor-pointer" />
-                
+
                 <div class="fixed inset-0 bg-black bg-opacity-0 pointer-events-none opacity-0 group-hover/image:opacity-100 group-hover/image:bg-opacity-75 group-hover/image:pointer-events-auto transition-all duration-300">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <img src="https://facepy.com/media/books/PNG/2024-11-01/b2eefc450c6343d78c3d33879b6eb475.png"

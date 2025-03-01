@@ -14,7 +14,7 @@
 <body class="bg-gray-50">
     <x-nav />
 
-    <main class="mt-24">
+    <main class="mt-16 lg:mt-24">
         @yield('content')
     </main>
 

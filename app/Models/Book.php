@@ -81,12 +81,23 @@ class Book extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('books-cover');
+        $this->addMediaCollection('books-cover')
+            ->useFallbackUrl(asset('assets/images/default-book-cover.webp'));
         $this->addMediaCollection('books-file');
     }
 
     public function scopePublished($query)
     {
         return $query->whereNotNull('published_date')->where('published_date', '<=', now());
+    }
+
+    public function createdDate()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function publishedDate()
+    {
+        return $this->published_date->diffForHumans();
     }
 }
