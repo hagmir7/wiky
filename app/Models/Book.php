@@ -111,6 +111,6 @@ class Book extends Model implements HasMedia
 
     public function publishedDate()
     {
-        return $this->published_date->diffForHumans();
+        return $this->published_date;
     }
 }

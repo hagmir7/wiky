@@ -1,8 +1,8 @@
 <div class="flex bg-white rounded-lg shadow-md relative hover:shadow-xl transition-shadow border duration-300">
-    <div class="w-[110px]">
+    <div class="w-[100px] lg:w-[110px]">
         <img src="{{ $book->getFirstMediaUrl('books-cover') }}"
             alt="Impossible to Forget"
-            class="h-full absolute -top-[22px] -left-[35px] w-[135px] rounded-md shadow-sm" />
+            class="h-full absolute lg:-top-[22px] lg:-left-[35px] w-[100px] lg:w-[135px] rounded-md shadow-sm" />
     </div>
     <div class="w-2/3 md:w-3/4 p-4">
         <h2 class="text-md font-semibold text-gray-800 mb-1">

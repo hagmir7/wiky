@@ -10,6 +10,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::published()
+            ->latest()
             ->paginate(15);
         return view('books.list', compact('books'));
     }
