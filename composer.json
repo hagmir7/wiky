@@ -16,7 +16,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "mokhosh/filament-rating": "^1.4",
-        "spatie/laravel-sluggable": "^3.6"
+        "spatie/laravel-sluggable": "^3.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Tags\HasTags;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
-class Book extends Model implements HasMedia
+class Book extends Model
 {
-    use HasFactory, InteractsWithMedia, HasTags;
+    use HasFactory, HasSlug;
     protected $fillable = [
         'name',
         'user_id',
@@ -23,8 +22,10 @@ class Book extends Model implements HasMedia
         'description',
         'content',
         'isbn',
+        'keywords',
+        'image',
         'isbn13',
-        'published_date',
+        'publication_date',
         'pages',
         'file',
         'slug',
@@ -32,10 +33,25 @@ class Book extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'published_date' => 'date',
+        'publication_date' => 'date',
         'status' => 'boolean',
-        'pages' => 'integer'
+        'pages' => 'integer',
+        'keywords' => 'array',
     ];
+
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->slugsShouldBeNoLongerThan(50)
+            ->doNotGenerateSlugsOnUpdate()
+            ->saveSlugsTo('slug');
+    }
+
+    public function language(){
+        return $this->belongsTo(language::class);
+    }
 
 
     public function save_book(): MorphOne
@@ -64,11 +80,6 @@ class Book extends Model implements HasMedia
         return $this->belongsToMany(Category::class, 'book_category');
     }
 
-    public function collections(): BelongsToMany
-    {
-        return $this->belongsToMany(Collection::class, 'book_collection');
-    }
-
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
@@ -79,14 +90,8 @@ class Book extends Model implements HasMedia
         return $this->belongsToMany(Quote::class, 'book_quote');
     }
 
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('books-cover');
-        $this->addMediaCollection('books-file');
-    }
-
-    public function scopePublished($query)
-    {
-        return $query->whereNotNull('published_date')->where('published_date', '<=', now());
-    }
+    // public function registerMediaCollections(): void
+    // {
+    //     $this->addMediaCollection('books-cover');
+    // }
 }

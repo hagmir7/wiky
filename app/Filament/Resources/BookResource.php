@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\IconSize;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
@@ -25,6 +26,13 @@ class BookResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = NavigationGroups::CONTENT;
 
+    protected static ?string $recordTitleAttribute = "name";
+
+    public static function getModelLabel(): string
+    {
+        return __("Book");
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -34,95 +42,26 @@ class BookResource extends Resource
                         Forms\Components\Section::make()
                             ->schema([
                                 Forms\Components\TextInput::make('name')
-                                    ->label('Book Title')
+                                    ->label(__("Book name"))
+                                    ->placeholder(__("Name..."))
                                     ->required()
                                     ->columnSpanFull()
-                                    ->maxLength(255)
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(fn($state, Forms\Set $set) => $set('slug', Str::slug($state))),
+                                    ->maxLength(255),
 
-                                Forms\Components\TextInput::make('slug')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->unique(ignoreRecord: true),
 
-                                Forms\Components\SpatieTagsInput::make('tags')
+                                Forms\Components\TagsInput::make('keywords')
                                     ->required()
-                                    ->columnSpanFull(),
-                                Forms\Components\TextInput::make('pages')
-                                    ->required()
-                                    ->numeric(),
-
-                                Forms\Components\DatePicker::make('published_date')
-                                    ->native(false)
-                                    ->default(now())
-                                    ->required(),
-                                Forms\Components\TextInput::make('isbn')
-                                    ->required()
-                                    ->label(__("ISBN"))
-                                    ->maxLength(255)
-                                    ->hintAction(
-                                        Forms\Components\Actions\Action::make('Generate')
-                                            ->color('primary')
-                                            ->size('sm')
-                                            ->action(function (Forms\Set $set) {
-                                                $set('isbn', sprintf('%09dX', random_int(100000000, 999999999)));
-                                            })
-                                    ),
-
-                                Forms\Components\TextInput::make('isbn13')
-                                    ->label(__("ISBN13"))
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->hintAction(
-                                        Forms\Components\Actions\Action::make('Generate')
-                                            ->color('primary')
-                                            ->size('sm')
-                                            ->action(function (Forms\Set $set) {
-                                                $set('isbn13', sprintf('%013d', random_int(1000000000000, 9999999999999)));
-                                            })
-                                    ),
-                                Forms\Components\Textarea::make('description')
-                                    ->columnSpanFull()
-                                    ->required(),
-                                    Forms\Components\Group::make()
-                                    ->schema([
-                                        Forms\Components\Toggle::make('use_markdown')
-                                            ->label('Use Markdown Editor')
-                                            ->live(),
-                                        
-                                        Forms\Components\MarkdownEditor::make('content')
-                                            ->label('Markdown Content')
-                                            ->required(fn ($get) => $get('use_markdown') === true)
-                                            ->columnSpanFull()
-                                            ->visible(fn ($get) => $get('use_markdown') === true),
-                                        
-                                        Forms\Components\RichEditor::make('content')
-                                            ->label('Rich Text Content')
-                                            ->required(fn ($get) => $get('use_markdown') === false)
-                                            ->columnSpanFull()
-                                            ->visible(fn ($get) => $get('use_markdown') === false)
-                                    ])->columnSpanFull(),
-                            ])
-                            ->columns(2)
-                            ->columnSpan(2),
-
-                        Forms\Components\Section::make()
-                            ->schema([
-                                SpatieMediaLibraryFileUpload::make('image')
-                                    ->collection('books-cover')
-                                    ->image()
-                                    ->required()
+                                    ->splitKeys(['Enter', ',', '،'])
+                                    ->separator(',')
+                                    ->nestedRecursiveRules([
+                                        'min:3',
+                                        'max:70',
+                                    ])
                                     ->columnSpanFull(),
 
-                                SpatieMediaLibraryFileUpload::make('file')
-                                    ->collection('books-file')
-                                    ->acceptedFileTypes(["application/pdf"]),
-
-                                // Authors and Series
-                                Forms\Components\Select::make('user_id')
-                                    ->label('User')
-                                    ->relationship('user', 'email')
+                                Forms\Components\Select::make('language_id')
+                                    ->label('Language')
+                                    ->relationship('language', 'name')
                                     ->preload()
                                     ->searchable()
                                     ->required(),
@@ -130,21 +69,82 @@ class BookResource extends Resource
                                 Forms\Components\Select::make('author_id')
                                     ->relationship('author', 'full_name')
                                     ->label('Author')
-                                    ->relationship('author', 'full_name')
+                                    ->createOptionForm(self::AuthorForm())
+                                    ->createOptionModalHeading(__("Create new Author"))
                                     ->preload()
                                     ->searchable()
                                     ->required(),
 
+                                Forms\Components\TextInput::make('pages')
+                                    ->numeric(),
+
+                                Forms\Components\DatePicker::make('published_date')
+                                    ->native(false)
+                                    ->default(now()),
+
+                                Forms\Components\TextInput::make('isbn')
+                                    ->label(__("ISBN"))
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('isbn13')
+                                    ->label(__("ISBN13"))
+                                    ->maxLength(255),
+
+
+                            ])
+                            ->columns(2)
+                            ->columnSpan(2),
+
+                        Forms\Components\Section::make()
+                            ->schema([
                                 Forms\Components\Select::make('series_id')
                                     ->relationship('series', 'name')
                                     ->preload()
+                                    ->createOptionForm(self::SeriesForm())
+                                    ->createOptionModalHeading(__("Create new Series"))
                                     ->searchable()
                                     ->default(null),
+
+                                Forms\Components\FileUpload::make('image')
+                                    ->required()
+                                    ->image(),
+
+                                Forms\Components\FileUpload::make('file')
+                                    ->acceptedFileTypes(['application/pdf']),
 
                                 Forms\Components\Toggle::make('status')
                                     ->required()
                                     ->default(true),
                             ])->columnSpan(1),
+                        Forms\Components\Section::make()
+                            ->schema([
+                                Forms\Components\Textarea::make('description')
+                                    ->rows(4)
+                                    ->columnSpanFull()
+                                    ->required(),
+                                Forms\Components\Group::make()
+                                    ->schema([
+                                        Forms\Components\Toggle::make('use_markdown')
+                                            ->label(__('Use Markdown Editor'))
+                                            ->live(),
+
+                                        Forms\Components\MarkdownEditor::make('content')
+                                            ->label('Markdown Content')
+                                            ->required(fn($get) => $get('use_markdown') === true)
+                                            ->columnSpanFull()
+                                            ->visible(fn($get) => $get('use_markdown') === true),
+
+                                        Forms\Components\RichEditor::make('content')
+                                            ->label('Rich Text Content')
+                                            ->required(fn($get) => $get('use_markdown') === false)
+                                            ->columnSpanFull()
+                                            ->visible(fn($get) => $get('use_markdown') === false)
+                                    ])->columnSpanFull(),
+
+                            ])->columnSpan(2),
+
+
+
                     ])
                     ->columns(3)
             ]);
@@ -154,33 +154,19 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image')
+                    ->label(__("Image")),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user.email')
-                    ->label('User Email')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('author.full_name')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('series.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('isbn')
+                    ->placeholder("__")
                     ->searchable(),
-                Tables\Columns\TextColumn::make('isbn13')
-                    ->searchable(),
-                SpatieMediaLibraryImageColumn::make('image')
-                    ->collection('books-cover'),
-                Tables\Columns\TextColumn::make('published_date')
-                    ->date()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('pages')
+                    ->badge()
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('file')
-                    ->searchable(),
-                Tables\Columns\SpatieTagsColumn::make('tags'),
-                Tables\Columns\ToggleColumn::make('status')
-                    ->label('Published'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -194,7 +180,19 @@ class BookResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label(false)
+                    ->tooltip(__("Edit"))
+                    ->iconSize(IconSize::Medium),
+                Tables\Actions\Action::make('view-demo')
+                    ->icon('heroicon-o-rocket-launch')
+                    ->openUrlInNewTab()
+                    ->iconSize(IconSize::Medium)
+                    ->label(false)
+                    ->tooltip(__("View"))
+                    ->url(function ($record) {
+                        return route('books.show', $record->slug);
+                    })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -203,6 +201,71 @@ class BookResource extends Resource
             ]);
     }
 
+    public static function SeriesForm()
+    {
+        return [
+            Forms\Components\Section::make()
+                ->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->label(__("Series"))
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\SpatieTagsInput::make('tags')
+                        ->label(__("Keywords")),
+
+                    Forms\Components\RichEditor::make('description')
+                        ->label(__("Description"))
+                        ->columnSpanFull()
+                        ->required(),
+
+                    Forms\Components\Toggle::make('status')
+                        ->inline(false)
+                        ->label(__("Status"))
+                        ->required(),
+
+                ])->columns(2)
+        ];
+    }
+
+
+
+
+    public static function AuthorForm()
+    {
+        return [
+            Forms\Components\Section::make()
+                ->schema([
+
+                    Forms\Components\FileUpload::make('image')
+                        ->image()
+                        ->avatar()
+                        ->columnSpanFull()
+                        ->label(false)
+                        ->alignCenter(),
+                    Forms\Components\TextInput::make('full_name')
+                        ->label(__("Author name"))
+                        ->required()
+                        ->unique()
+                        ->maxLength(255),
+                    Forms\Components\DatePicker::make('birth')
+                        ->label(__("Birth"))
+                        ->native(false)
+                        ->maxDate(now()->subYear(20)),
+                    Forms\Components\Select::make('country_id')
+                        ->searchable()
+                        ->preload()
+                        ->label(__("Country"))
+                        ->relationship('country', 'name'),
+                    Forms\Components\Toggle::make('is_verified')
+                        ->inline(false)
+                        ->label(__("Verified")),
+                    Forms\Components\RichEditor::make('description')
+                        ->label(__("Description"))
+                        ->columnSpanFull(),
+
+                ])->columns(2)
+        ];
+    }
     public static function getRelations(): array
     {
         return [

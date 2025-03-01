@@ -28,25 +28,20 @@ class SeriesResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
+                            ->label(__("Series"))
                             ->required()
-                            ->maxLength(255)
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                            
-                        Forms\Components\MarkdownEditor::make('description')
+                            ->maxLength(255),
+                        Forms\Components\SpatieTagsInput::make('tags')
+                            ->label(__("Keywords")),
+                        Forms\Components\RichEditor::make('description')
+                            ->label(__("Description"))
+                            ->columnSpanFull()
                             ->required(),
-                    ])->columnSpan(2),
-                Forms\Components\Section::make()
-                    ->schema([
-                        Forms\Components\SpatieTagsInput::make('tags'),
                         Forms\Components\Toggle::make('status')
+                            ->inline(false)
+                            ->label(__("Status"))
                             ->required(),
-                    ])->columnSpan(1)
+                    ])->columns(2),
             ])->columns(3);
     }
 
@@ -56,14 +51,14 @@ class SeriesResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\SpatieTagsColumn::make('tags')
-                    ->searchable(),
                 Tables\Columns\ToggleColumn::make('status'),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__("Created at"))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__("Created at"))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
