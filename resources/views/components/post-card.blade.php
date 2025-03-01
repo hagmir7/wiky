@@ -1,9 +1,9 @@
 @props(['post'])
 
-<div class="bg-white shadow-lg rounded-lg overflow-hidden">
+<div {{$attributes->merge(['class'=> 'bg-white shadow-lg rounded-lg overflow-hidden '])}}>
     <a href="{{ route('blogs.show', $post->slug) }}">
         <img class="w-full h-56 object-cover object-center"
-            src="{{ $post->getCoverUrl() }}" alt="{{ $post->title }}">
+            src="{{ $post->getFirstMediaUrl('posts-cover') }}" alt="{{ $post->title }}">
     </a>
     <div class="p-4 space-y-2">
         <p class="text-sm font-semibold text-gray-400">{{ $post->created_at->format('M d, Y') }}</p>

@@ -83,7 +83,7 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('book.name')
                     ->numeric()
                     ->sortable()
-                    ->maxLength(30),
+                    ->limit(30),
 
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('posts-cover'),

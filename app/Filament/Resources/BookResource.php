@@ -132,7 +132,7 @@ class BookResource extends Resource
                                             ->label('Markdown Content')
                                             ->required(fn($get) => $get('use_markdown') === true)
                                             ->columnSpanFull()
-                                            ->visible(fn($get) => $get('use_markdown') === true),
+                                            ->visible(fn ($get) => $get('use_markdown') === true),
 
                                         Forms\Components\RichEditor::make('content')
                                             ->label('Rich Text Content')
@@ -175,7 +175,7 @@ class BookResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Sluggable\HasSlug;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Tags\HasTags;
 
-class Book extends Model
+class Book extends Model implements HasMedia
 {
-    use HasFactory, HasSlug;
+    use HasFactory, InteractsWithMedia, HasTags;
     protected $fillable = [
         'name',
         'user_id',
@@ -90,8 +92,25 @@ class Book extends Model
         return $this->belongsToMany(Quote::class, 'book_quote');
     }
 
-    // public function registerMediaCollections(): void
-    // {
-    //     $this->addMediaCollection('books-cover');
-    // }
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('books-cover')
+            ->useFallbackUrl(asset('assets/images/default-book-cover.webp'));
+        $this->addMediaCollection('books-file');
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->whereNotNull('published_date')->where('published_date', '<=', now());
+    }
+
+    public function createdDate()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function publishedDate()
+    {
+        return $this->published_date;
+    }
 }
