@@ -16,3 +16,8 @@ Route::prefix('/blogs')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('blogs.list');
     Route::get('/{post:slug}', [PostController::class, 'show'])->name('blogs.show');
 });
+
+// About page
+Route::get('/about-us', function () {
+    return view('about.index');
+})->name('about');
