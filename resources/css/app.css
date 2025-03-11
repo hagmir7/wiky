@@ -40,6 +40,11 @@
     100% { transform: translateX(0); opacity: 1; }
 }
 
+@keyframes slideLeft {
+    0% { transform: translateX(30px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
 .animate-fade-in {
     animation: fadeIn 0.7s ease-in-out forwards;
 }
@@ -51,3 +56,18 @@
 .animate-slide-right {
     animation: slideRight 0.7s ease-in-out forwards;
 }
+
+.animate-slide-left {
+    animation: slideLeft 0.7s ease-in-out forwards;
+}
+
+.mobile-text-outline {
+    -webkit-text-stroke: 1px theme('colors.primary.600'); /* Default for mobile */
+    color: transparent;
+}
+
+.desktop-text-outline {
+    -webkit-text-stroke: 0.5px theme('colors.primary.600'); /* Default for desktop */
+    color: transparent;
+}
+
