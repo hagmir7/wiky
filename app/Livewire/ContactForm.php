@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Filament\Resources\ContactResource;
 use App\Models\Contact;
 use App\Models\User;
+use App\Notifications\NewContactNotification;
 use Filament\Notifications\Actions\Action;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
@@ -62,24 +63,10 @@ class ContactForm extends Component
             'email' => $this->email,
             'subject' => $this->subject,
             'message' => $this->message,
-            'status' => 'new',
-            'ip_address' => request()->ip(),
         ]);
 
         // Notify admin
-//        $this->notifyAdmin($contact);
-
-        $admin = User::where('email', 'admin@admin.com')->first();
-
-        \Filament\Notifications\Notification::make()
-            ->title('New Contact Message')
-            ->body('From: ' . $contact->name)
-            ->actions([
-                Action::make('view')
-                    ->label('View')
-                    ->url(ContactResource::getUrl('view', ['record' => $contact->id])),
-            ])
-            ->sendToDatabase($admin);
+        $this->notifyAdmin($contact);
 
         // Reset form
         $this->resetForm();
@@ -92,6 +79,16 @@ class ContactForm extends Component
     {
         $admin = User::where('email', 'admin@admin.com')->first();
         Notification::send($admin, new NewContactNotification($contact));
+
+        \Filament\Notifications\Notification::make()
+            ->title('New Contact Message')
+            ->body('From: ' . $contact->name)
+            ->actions([
+                Action::make('view')
+                    ->label('View')
+                    ->url(ContactResource::getUrl('view', ['record' => $contact->id])),
+            ])
+            ->sendToDatabase($admin);
     }
 
     private function resetForm(): void

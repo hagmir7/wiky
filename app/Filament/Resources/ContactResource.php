@@ -39,8 +39,7 @@ class ContactResource extends Resource
                             ->maxLength(200),
 
                         Forms\Components\Textarea::make('message')
-                            ->required()
-                            ->rows(6),
+                            ->required(),
                     ]),
             ]);
     }
@@ -78,7 +77,6 @@ class ContactResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('reply')
                     ->label('Send Reply')
                     ->icon('heroicon-o-paper-airplane')
