@@ -15,5 +15,6 @@ class Contact extends Model
         'email',
         'subject',
         'message',
+        'is_replied',
     ];
 }

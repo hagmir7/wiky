@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
 use App\Models\Contact;
+use App\Notifications\ContactReplyNotification;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -17,7 +18,7 @@ class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
     public static function form(Form $form): Form
     {
@@ -82,20 +83,25 @@ class ContactResource extends Resource
                     ->icon('heroicon-o-paper-airplane')
                     ->color('primary')
                     ->form([
-                        Forms\Components\RichEditor::make('reply_message')
+                        Forms\Components\Textarea::make('reply_message')
                             ->label('Reply Message')
                             ->required()
                             ->helperText('Write your reply to this contact'),
                     ])
                     ->action(function (Contact $record, array $data) {
-                        // This would typically connect to a service to send the email
-                        // Example: Mail::to($record->email)->send(new ContactReply($data['reply_message']));
+                        // Send the reply notification
+                        $record->notify(new ContactReplyNotification($record->name, $data['reply_message']));
 
+                        // Mark the contact as replied
+                        $record->update(['is_replied' => true]);
+
+                        // Notify the admin that the reply was sent successfully
                         Notification::make()
                             ->title('Reply sent successfully')
                             ->success()
                             ->send();
-                    }),
+                    })
+                    ->hidden(fn (Contact $record) => $record->is_replied),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
