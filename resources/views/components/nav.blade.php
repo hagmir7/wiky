@@ -28,7 +28,7 @@
                     <x-top-nav-link href="#" :active="request()->is('guides*')">GUIDES</x-top-nav-link>
                     <x-top-nav-link href="#" :active="request()->is('promotions*')">PROMOTIONS</x-top-nav-link>
                     <x-top-nav-link href="{{ route('about') }}" :active="request()->is('about*')">ABOUT US</x-top-nav-link>
-                    <x-top-nav-link href="#" :active="request()->is('contact*')">CONTACT</x-top-nav-link>
+                    <x-top-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')">CONTACT</x-top-nav-link>
                 </div>
                 <!-- Right Section -->
                 <div class="flex items-center space-x-4">
@@ -147,7 +147,7 @@
                     </x-mobile-nav-link>
                     <x-mobile-nav-link href="{{ route('about') }}" :active="request()->is('about*')" class="block mt-3">ABOUT US
                     </x-mobile-nav-link>
-                    <x-mobile-nav-link href="#" :active="request()->is('contact*')" class="block mt-3">CONTACT
+                    <x-mobile-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')" class="block mt-3">CONTACT
                     </x-mobile-nav-link>
                     <x-mobile-nav-link href="#" :active="request()->is('quote*')" class="block mt-3">REQUEST A QUOTE
                     </x-mobile-nav-link>

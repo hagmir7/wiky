@@ -21,3 +21,8 @@ Route::prefix('/blogs')->group(function () {
 Route::get('/about-us', function () {
     return view('about.index');
 })->name('about');
+
+// Contact page
+Route::get('/contact-us', function () {
+    return view('contact.index');
+})->name('contacts.index');
