@@ -64,6 +64,15 @@ class ContactResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
+                Tables\Columns\TextColumn::make('reply_status')
+                    ->label('Status')
+                    ->badge()
+                    ->getStateUsing(fn (Contact $record): string => $record->is_replied ? 'Replied' : 'Pending')
+                    ->colors([
+                        'success' => 'Replied',
+                        'danger' => 'Pending',
+                    ]),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -90,7 +99,7 @@ class ContactResource extends Resource
                     ])
                     ->action(function (Contact $record, array $data) {
                         // Send the reply notification
-                        $record->notify(new ContactReplyNotification($record->name, $data['reply_message']));
+                        $record->notify(new ContactReplyNotification($data['reply_message'], $record->name));
 
                         // Mark the contact as replied
                         $record->update(['is_replied' => true]);
@@ -102,6 +111,14 @@ class ContactResource extends Resource
                             ->send();
                     })
                     ->hidden(fn (Contact $record) => $record->is_replied),
+
+//                Tables\Actions\Action::make('view_reply_indicator')
+//                    ->label('Replied')
+//                    ->icon('heroicon-o-check-circle')
+//                    ->color('success')
+//                    ->disabled(true)
+//                    ->tooltip('This contact has been replied to')
+//                    ->visible(fn (Contact $record) => $record->is_replied),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

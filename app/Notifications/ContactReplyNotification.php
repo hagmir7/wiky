@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class ContactReplyNotification extends Notification
 {
@@ -39,10 +40,10 @@ class ContactReplyNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Re: Your Contact Message')
+            ->subject('Re: ' . config('app.name') . ' support@wikybook.com')
             ->greeting('Hello ' . $this->contactName . ',')
             ->line('Thank you for reaching out to us. We have reviewed your message and would like to respond:')
-            ->line('<strong>Our Response:</strong>')
+            ->line(new HtmlString('<strong> Our Response: </strong>'))
             ->line($this->replyMessage)
             ->line('If you have any further questions, feel free to reach out.')
             ->line('Thank you for using our application!');
