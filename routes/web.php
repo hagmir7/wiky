@@ -17,7 +17,7 @@ Route::prefix('/blogs')->group(function () {
     Route::get('/{post:slug}', [PostController::class, 'show'])->name('blogs.show');
 });
 
-Route::group('pages')->group(function () {
+Route::prefix('pages')->group(function () {
     Route::get('/{page:slug}', [PageController::class, 'show'])->name('page.show');
 });
 
