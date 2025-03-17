@@ -111,14 +111,6 @@ class ContactResource extends Resource
                             ->send();
                     })
                     ->hidden(fn (Contact $record) => $record->is_replied),
-
-//                Tables\Actions\Action::make('view_reply_indicator')
-//                    ->label('Replied')
-//                    ->icon('heroicon-o-check-circle')
-//                    ->color('success')
-//                    ->disabled(true)
-//                    ->tooltip('This contact has been replied to')
-//                    ->visible(fn (Contact $record) => $record->is_replied),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
