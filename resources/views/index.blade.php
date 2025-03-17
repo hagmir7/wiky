@@ -3,7 +3,7 @@
 @section('content')
     <x-swiper />
 
-    <div class="container xl:max-w-7xl mx-auto pt-12 lg:pt-20">
+    <div class="container max-w-7xl mx-auto pt-12 lg:pt-20">
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 space-x-4">
 
             @forelse($books as $book)
