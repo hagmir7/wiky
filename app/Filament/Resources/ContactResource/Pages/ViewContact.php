@@ -29,7 +29,7 @@ class ViewContact extends ViewRecord
                 ])
                 ->action(function (Contact $record, array $data) {
                     // send a reply to the contact
-                    $this->notify(new ContactReplyNotification($data['reply_message'], $record->name));
+                    $record->notify(new ContactReplyNotification($data['reply_message'], $record->name));
 
                     // mark the contact as replied
                     $record->update(['is_replied' => true]);
