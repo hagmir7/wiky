@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\ContactResource;
 use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -59,7 +60,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                QuickCreatePlugin::make(),
+                QuickCreatePlugin::make()
+                    ->excludes([
+                        \App\Filament\Resources\ContactResource::class,
+                    ]),
             ]);
     }
 }
