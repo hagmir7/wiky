@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
 
          User::create([
             'first_name' => "Hassan",
-            'last_name' => "Afssas",
+            'last_name' => "Agmir",
             'email' => "agmir@wikybook.com",
             'password' => Hash::make('agmir'),
             'status' => true
