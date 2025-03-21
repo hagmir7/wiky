@@ -223,29 +223,31 @@
                     </div>
 
 
-                    {{-- Related Posts --}}
-                    <div class="mt-12 animate-fade-in" style="animation-delay: 0.5s">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6">You might also like</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            @foreach($posts ?? [] as $post)
-                            <a href="{{ route('blogs.show', $post) }}" class="group">
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                                    <img src="{{ optional($post->getMedia('posts-cover')->first())?->getUrl() ?? asset('default-image.jpg') }}"
-                                        alt="{{ $post->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
-                                    <div class="p-2 mt-0 pt-0">
-                                        <h3 class="font-semibold text-gray-800 text-lg group-hover:text-blue-600 transition mb-2">
-                                            {{ \Illuminate\Support\Str::limit($post->title, 60) }}
-                                        </h3>
-                                        <p class="text-sm text-gray-500">{{ $post->created_at->format('M d, Y') }}</p>
-                                    </div>
-                                </div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
+
                     {{-- @livewire('post-comments', ['post' => $post], key($post->id)) --}}
                 </div>
             </article>
+            {{-- Related Posts --}}
+            <div class="mt-12 animate-fade-in" style="animation-delay: 0.5s">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">You might also like</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($posts ?? [] as $post)
+                    <a href="{{ route('blogs.show', $post) }}" class="group">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                            <img src="{{ optional($post->getMedia('posts-cover')->first())?->getUrl() ?? asset('default-image.jpg') }}"
+                                alt="{{ $post->title }}"
+                                class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                            <div class="p-2 mt-0 pt-0">
+                                <h3 class="font-semibold text-gray-800 text-lg group-hover:text-blue-600 transition mb-2">
+                                    {{ \Illuminate\Support\Str::limit($post->title, 60) }}
+                                </h3>
+                                <p class="text-sm text-gray-500">{{ $post->created_at->format('M d, Y') }}</p>
+                            </div>
+                        </div>
+                    </a>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 </section>

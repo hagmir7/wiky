@@ -1,4 +1,4 @@
-<div class="w-full pt-12 lg:pt-20">
+<div class="w-full pt-0">
     <div class="wave">
         <svg class="w-full" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 2767 135.29">
@@ -25,20 +25,25 @@
                 </div>
 
                 <div class="flex flex-wrap justify-center md:justify-end space-x-4 mb-6 md:mb-0">
-                    <a href="#" class="hover:underline">Wikybok</a>
+                    <x-top-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')">BLOG</x-top-nav-link>
+                    {{-- <x-top-nav-link href="#" :active="request()->is('guides*')">GUIDES</x-top-nav-link> --}}
+                    {{-- <x-top-nav-link href="#" :active="request()->is('promotions*')">PROMOTIONS</x-top-nav-link> --}}
+                    <x-top-nav-link href="{{ route('about') }}" :active="request()->is('about*')">ABOUT US</x-top-nav-link>
+                    <x-top-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')">CONTACT</x-top-nav-link>
+                    {{-- <a href="#" class="hover:underline">Wikybok</a>
                     <a href="#" class="hover:underline">HELP</a>
                     <a href="#" class="hover:underline">TERMS</a>
-                    <a href="#" class="hover:underline">PRIVACY</a>
+                    <a href="#" class="hover:underline">PRIVACY</a> --}}
                 </div>
 
                 <div class="flex space-x-4 mb-6 md:mb-0">
-                    <a href="#" class="hover:text-gray-200">
+                    <a href="https://www.t.me/wikybook" class="hover:text-gray-200" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                   d="M20 5L4.672 11.373c-.395.164-.592.247-.643.354a.3.3 0 0 0 .016.29c.063.1.268.16.68.281L10.5 14M20 5l-2.065 13.049c-.04.254-.06.381-.127.45a.3.3 0 0 1-.223.097c-.097 0-.205-.072-.421-.216l-2.93-1.956M20 5l-9.5 9m0 0l.156 4.3c0 .334 0 .501.069.585c.06.074.15.116.246.115c.11-.001.24-.108.5-.32l2.764-2.256M10.5 14l3.735 2.424" />
                         </svg>
                     </a>
-                    <a href="#" class="hover:text-gray-200">
+                    <a href="https://www.pinterest.com/wikybook" class="hover:text-gray-200" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
                                 <path
@@ -47,7 +52,7 @@
                             </g>
                         </svg>
                     </a>
-                    <a href="#" class="hover:text-gray-200">
+                    <a href="https://www.instagram.com/wikybook" class="hover:text-gray-200" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
                                 <path d="M15.462 11.487a3.5 3.5 0 1 1-6.925 1.026a3.5 3.5 0 0 1 6.925-1.026M17 6.5h.5" />
@@ -56,7 +61,7 @@
                             </g>
                         </svg>
                     </a>
-                    <a href="#" class="hover:text-gray-200">
+                    <a href="https://www.facebook.com/wikybook" class="hover:text-gray-200" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                   d="M6.5 10v4h3v7h4v-7h3l1-4h-4V8c0-.545.455-1 1-1h3V3h-3c-2.723 0-5 2.277-5 5v2z" />
@@ -64,11 +69,11 @@
                     </a>
                 </div>
 
-                <div class="flex flex-col items-end">
+                {{-- <div class="flex flex-col items-end">
                     <a href="#" class="hover:underline">PLUSHIES</a>
                     <a href="#" class="hover:underline">APPAREL</a>
                     <a href="#" class="hover:underline">ACCESSORIES</a>
-                </div>
+                </div> --}}
             </div>
 
             <div class="text-center mt-8">

@@ -23,10 +23,9 @@
             <div class="hidden lg:flex justify-between items-center py-1">
                 <!-- Left Links -->
                 <div class="flex space-x-6">
-                    <x-top-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')">BLOG
-                    </x-top-nav-link>
-                    <x-top-nav-link href="#" :active="request()->is('guides*')">GUIDES</x-top-nav-link>
-                    <x-top-nav-link href="#" :active="request()->is('promotions*')">PROMOTIONS</x-top-nav-link>
+                    <x-top-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')">BLOG</x-top-nav-link>
+                    {{-- <x-top-nav-link href="#" :active="request()->is('guides*')">GUIDES</x-top-nav-link> --}}
+                    {{-- <x-top-nav-link href="#" :active="request()->is('promotions*')">PROMOTIONS</x-top-nav-link> --}}
                     <x-top-nav-link href="{{ route('about') }}" :active="request()->is('about*')">ABOUT US</x-top-nav-link>
                     <x-top-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')">CONTACT</x-top-nav-link>
                 </div>
@@ -34,27 +33,27 @@
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-4">
                         <div class="flex justify-center items-center gap-2">
-                            <span>
+                            <a href="https://www.t.me/wikybook" class="hover:text" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                     <path fill="none" stroke="currentColor" stroke-linecap="round"
                                           stroke-linejoin="round" stroke-width="1.5"
                                           d="M20 5L4.672 11.373c-.395.164-.592.247-.643.354a.3.3 0 0 0 .016.29c.063.1.268.16.68.281L10.5 14M20 5l-2.065 13.049c-.04.254-.06.381-.127.45a.3.3 0 0 1-.223.097c-.097 0-.205-.072-.421-.216l-2.93-1.956M20 5l-9.5 9m0 0l.156 4.3c0 .334 0 .501.069.585c.06.074.15.116.246.115c.11-.001.24-.108.5-.32l2.764-2.256M10.5 14l3.735 2.424"/>
                                 </svg>
-                            </span>
+                            </a>
                         </div>
                         <span class="mx-2">|</span>
                         <div class="flex justify-center items-center gap-2">
-                            <span>
+                            <a href="https://www.facebook.com/wikybook" class="hover:text" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                     <path fill="none" stroke="currentColor" stroke-linecap="round"
                                           stroke-linejoin="round" stroke-width="1.5"
                                           d="M6.5 10v4h3v7h4v-7h3l1-4h-4V8c0-.545.455-1 1-1h3V3h-3c-2.723 0-5 2.277-5 5v2z"/>
                                 </svg>
-                            </span>
+                            </a>
                         </div>
                         <span class="mx-2">|</span>
                         <div class="flex justify-center items-center gap-2">
-                            <span>
+                            <a href="https://www.instagram.com/wikybook" class="hover:text" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                        stroke-width="1.5">
@@ -64,7 +63,7 @@
                                             d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6z"/>
                                     </g>
                                 </svg>
-                            </span>
+                            </a>
 
                         </div>
                     </div>
@@ -93,11 +92,13 @@
 
             <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center space-x-6">
-                <x-nav-link href="{{ route('books.home') }}" :active="request()->is('books*')">Books</x-nav-link>
-                <x-nav-link href="#" :active="request()->is('authors*')">Authors</x-nav-link>
-                <x-nav-link href="#" :active="request()->is('collections*')">Collections</x-nav-link>
-                <x-nav-link href="#" :active="request()->is('genres*')">Genres</x-nav-link>
-                <x-nav-link href="#" :active="request()->is('quotes*')">Quotes</x-nav-link>
+                <x-nav-link href="{{ route('home') }}" :active="request()->is('/*')">{{ __("Home") }}</x-nav-link>
+                <x-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')">{{ __("Blog") }}</x-nav-link>
+                {{-- <x-nav-link href="{{ route('books.home') }}" :active="request()->is('books*')">Books</x-nav-link> --}}
+                <x-nav-link href="{{ route('about') }}" :active="request()->is('about*')">{{ __("About us") }}</x-nav-link>
+                {{-- <x-nav-link href="#" :active="request()->is('collections*')">Collections</x-nav-link> --}}
+                <x-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')">{{ __("Contact us") }}</x-nav-link>
+                {{-- <x-nav-link href="#" :active="request()->is('quotes*')">Quotes</x-nav-link> --}}
             </div>
 
             <!-- User and Cart Icons -->
