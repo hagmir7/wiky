@@ -32,6 +32,12 @@ class User extends Authenticatable implements FilamentUser, HasName, HasMedia
         'status',
     ];
 
+
+     public function canAccessPanel(Panel $panel): bool
+    {
+        return str_ends_with($this->email, '@wikybook.com') && $this->hasVerifiedEmail();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
