@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Panel;
 
 class User extends Authenticatable implements FilamentUser, HasName, HasMedia
 {
