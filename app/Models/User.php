@@ -56,7 +56,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasMedia
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            // 'password' => 'hashed',
             'status' => \App\Enums\UserStatusEnum::class,
         ];
     }
