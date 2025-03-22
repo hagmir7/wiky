@@ -1,6 +1,6 @@
 <div>
     @if ($success)
-        <div class="rounded-lg bg-green-50 border border-green-200 p-6 mb-6 animate-fade-in">
+        <div class="rounded-lg bg-green-50 border border-green-200 p-2 md:p-6 mb-6 animate-fade-in">
             <div class="flex">
                 <div class="flex-shrink-0">
                     <svg class="h-5 w-5 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

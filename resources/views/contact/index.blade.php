@@ -150,8 +150,7 @@
 
                 <!-- Contact Section -->
                 <div class="lg:col-span-full opacity-0 animate-slide-up" style="animation-delay: 0.6s;">
-                    <div
-                        class="bg-white/70 backdrop-blur-md border-1 border-white/30 shadow-md border-gray-400 rounded-3xl p-10 relative overflow-hidden">
+                    <div class="bg-white/70 backdrop-blur-md border-1 border-white/30 shadow-md border-gray-400 rounded-3xl p-4 md:p-10 relative overflow-hidden">
                         <div
                             class="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-br from-primary-100 to-primary-300 rounded-full opacity-20 blur-3xl"></div>
                         <div
