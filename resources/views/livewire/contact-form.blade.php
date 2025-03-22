@@ -54,7 +54,7 @@
                 <input id="privacyPolicy" wire:model="privacyPolicy" type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
             </div>
             <div class="ml-3 text-sm">
-                <label for="privacyPolicy" class="font-medium text-gray-700">{{__("I agree to the")}} <a href="#" class="text-primary-600 hover:text-primary-700">{{__("privacy policy")}}</a></label>
+                <label for="privacyPolicy" class="font-medium text-gray-700">{{__("I agree to the")}} <a href="/pages/privacy-policy" class="text-primary-600 hover:text-primary-700">{{__("privacy policy")}}</a></label>
                 @error('privacyPolicy') <div class="text-red-500 text-sm mt-1">{{ $message }}</div> @enderror
             </div>
         </div>

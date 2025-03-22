@@ -34,6 +34,8 @@
                     <a href="#" class="hover:underline">HELP</a>
                     <a href="#" class="hover:underline">TERMS</a>
                     <a href="#" class="hover:underline">PRIVACY</a> --}}
+
+                    <x-top-nav-link href="/pages/privacy-policy" :active="request()->is('page*')">Privacy Policy</x-top-nav-link>
                 </div>
 
                 <div class="flex space-x-4 mb-6 md:mb-0">
