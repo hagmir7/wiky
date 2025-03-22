@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
             'last_name' => "Afssas",
             'email' => "afssas@wikybook.com",
             'password' => Hash::make('afssas'),
-            'status' => true
+            'status' => true,
+            'email_verified_at' => now(),
         ]);
 
 
@@ -28,7 +29,8 @@ class UserSeeder extends Seeder
             'last_name' => "Agmir",
             'email' => "agmir@wikybook.com",
             'password' => Hash::make('agmir'),
-            'status' => true
+            'status' => true,
+            'email_verified_at' => now()
         ]);
     }
 }

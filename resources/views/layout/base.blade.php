@@ -18,6 +18,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="manifest" href="/site.webmanifest" />
+    <meta name="google-site-verification" content="E2N8kZg52up1q1AY9fEaHW9LQD_RdEBmPcfhqc6Bqdc" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head::styles')
     @stack('head::scripts')

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PageController;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
