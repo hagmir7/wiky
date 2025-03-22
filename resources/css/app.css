@@ -16,6 +16,10 @@
     font-size: 36px;
 }
 
+.attachment__caption{
+    display: none!important;
+}
+
 .post-text h2 {
     font-size: 30px;
 }

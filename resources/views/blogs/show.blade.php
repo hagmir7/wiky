@@ -81,9 +81,7 @@
         <div class="max-w-4xl mx-auto">
             <article class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="relative">
-                    <img src="{{ $post->getMedia('posts-cover')->first()?->getUrl() }}" alt="{{ $post->title }}"
-                        class="w-full h-80 md:h-[28rem] object-cover zoom-img">
-
+                    <img src="{{ $post->getMedia('posts-cover')->first()?->getUrl() }}" alt="{{ $post->title }}" class="w-full zoom-img" />
                     @if(isset($post->category))
                     <span class="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
                         {{ $post->category->name }}

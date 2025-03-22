@@ -62,7 +62,4 @@ class Post extends Model implements HasMedia
             ->saveSlugsTo('slug');
     }
 
-
-
-
 }
