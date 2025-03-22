@@ -129,17 +129,21 @@
             class="lg:hidden pb-4 h-screen">
             <div class="flex flex-col space-y-3">
 
-                <div class="pt-4 border-t border-gray-200">
-                    <x-mobile-nav-link href="{{ route('home') }}" :active="request()->is('/*')" class="block">
+                <div class="pt-4 border-t border-gray-200 space-y-7">
+
+                    <x-mobile-nav-link href="{{ route('home') }}" :active="request()->is('/*')" class="block mt-4 text-xl">
                         Home
                     </x-mobile-nav-link>
-                    <x-mobile-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')" class="block">
+
+                    <x-mobile-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')" class="block mt-4 text-xl">
                         BLOG
                     </x-mobile-nav-link>
-                    <x-mobile-nav-link href="{{ route('about') }}" :active="request()->is('about*')" class="block mt-3">
+
+                    <x-mobile-nav-link href="{{ route('about') }}" :active="request()->is('about*')" class="block mt-4 text-xl">
                         ABOUT US
                     </x-mobile-nav-link>
-                    <x-mobile-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')" class="block mt-3">
+
+                    <x-mobile-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')" class="block mt-4 text-xl">
                         CONTACT
                     </x-mobile-nav-link>
 
