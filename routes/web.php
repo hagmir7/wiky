@@ -30,3 +30,9 @@ Route::get('/about-us', function () {
 Route::get('/contact-us', function () {
     return view('contact.index');
 })->name('contacts.index');
+
+
+
+Route::get('/livewire/update', function () {
+    return redirect()->back();
+});
