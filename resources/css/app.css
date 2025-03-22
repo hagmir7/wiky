@@ -30,6 +30,14 @@
     padding: 15px 0 5px 0;
 }
 
+figure a img {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px
+}
+
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
