@@ -5,12 +5,11 @@
         <div class="container mx-auto px-6 pt-24 max-w-6xl overflow-hidden">
             <header class="text-center mb-16 opacity-0 animate-fade-in" style="animation-delay: 0.2s;">
                 <div class="inline-block mb-3">
-                    <span
-                        class="px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-800 border border-primary-200">
+                    <span class="px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-800 border border-primary-200">
                         {{__("Get in Touch")}}
                     </span>
                 </div>
-                <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-primary-950 via-primary-800 to-primary-700 bg-clip-text text-transparent">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary-950 via-primary-800 to-primary-700 bg-clip-text text-transparent">
                     {{__("Contact Us")}}
                 </h1>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -21,13 +20,9 @@
             <div class="grid lg:grid-cols-2 justify-center gap-10">
                 <!-- Contact Information Column -->
                 <div class="space-y-10 opacity-0 animate-slide-right" style="animation-delay: 0.4s;">
-                    <div
-                        class="bg-white/70 backdrop-blur-md border border-white/30 shadow-lg rounded-2xl p-8 relative overflow-hidden">
-                        <div
-                            class="absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary-200 to-primary-400 rounded-full opacity-20 blur-3xl"></div>
-
+                    <div class="bg-white/70 backdrop-blur-md border border-white/30 shadow-lg rounded-2xl p-3 md:p-8 relative overflow-hidden">
+                        <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary-200 to-primary-400 rounded-full opacity-20 blur-3xl"></div>
                         <h3 class="text-2xl font-bold text-primary-950 mb-6 relative">{{__('Connect With Us')}}</h3>
-
                         <div class="space-y-6 relative">
                             <div class="flex items-start">
                                 <div
@@ -40,7 +35,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-semibold text-primary-950 mb-1">{{__("Email")}}</h4>
-                                    <p class="text-gray-600">{{__("support@wikybook.com")}}</p>
+                                    <p class="text-gray-600"><a href="mailto:support@wikybook.com">support@wikybook.com</a></p>
                                     <p class="text-gray-500 text-sm mt-1">{{__("We aim to respond within 24 hours")}}</p>
                                 </div>
                             </div>
@@ -56,7 +51,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-semibold text-primary-950 mb-1">{{__("Phone")}}</h4>
-                                    <p class="text-gray-600">{{__("+212 612345678")}}</p>
+                                    <p class="text-gray-600"><a href="tel:+212612345678">+212 612345678</a></p>
                                     <p class="text-gray-500 text-sm mt-1">{{__("Mon-Fri, 9AM-5PM EST")}}</p>
                                 </div>
                             </div>
@@ -74,7 +69,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-semibold text-primary-950 mb-1">{{__("Address")}}</h4>
-                                    <p class="text-gray-600">{{__("Fes, Nadour")}}</p>
+                                    <p class="text-gray-600">{{__("Fes, Nador")}}</p>
                                     <p class="text-gray-600">{{__("Morocco")}}</p>
                                 </div>
                             </div>
@@ -83,7 +78,7 @@
                         <div class="mt-4">
                             <h4 class="text-lg font-semibold text-primary-950 mb-4">{{__("Follow Us")}}</h4>
                             <div class="flex space-x-4">
-                                <a href="#"
+                                <a href="https://t.me/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -91,7 +86,7 @@
                                               d="M20 5L4.672 11.373c-.395.164-.592.247-.643.354a.3.3 0 0 0 .016.29c.063.1.268.16.68.281L10.5 14M20 5l-2.065 13.049c-.04.254-.06.381-.127.45a.3.3 0 0 1-.223.097c-.097 0-.205-.072-.421-.216l-2.93-1.956M20 5l-9.5 9m0 0l.156 4.3c0 .334 0 .501.069.585c.06.074.15.116.246.115c.11-.001.24-.108.5-.32l2.764-2.256M10.5 14l3.735 2.424"/>
                                     </svg>
                                 </a>
-                                <a href="#"
+                                <a href="https://pinterest.com/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                         <g fill="none" stroke="currentColor" stroke-linecap="round"
@@ -102,7 +97,7 @@
                                         </g>
                                     </svg>
                                 </a>
-                                <a href="#"
+                                <a href="https://instagram.com/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                         <g fill="none" stroke="currentColor" stroke-linecap="round"
@@ -114,7 +109,7 @@
                                         </g>
                                     </svg>
                                 </a>
-                                <a href="#"
+                                <a href="https://facebook.com/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -128,8 +123,7 @@
                 </div>
 
                 <div class="space-y-10 opacity-0 animate-slide-left" style="animation-delay: 0.4s;">
-                    <div
-                        class="lg:col-span-2 bg-white/70 backdrop-blur-md border border-white/30 shadow-lg rounded-2xl p-8 relative overflow-hidden">
+                    <div class="lg:col-span-2 bg-white/70 backdrop-blur-md border border-white/30 shadow-sm border-gray-400 rounded-2xl p-3 md:p-8 relative overflow-hidden">
                         <div
                             class="absolute -top-20 -left-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-300 rounded-full opacity-20 blur-3xl"></div>
 
@@ -157,7 +151,7 @@
                 <!-- Contact Section -->
                 <div class="lg:col-span-full opacity-0 animate-slide-up" style="animation-delay: 0.6s;">
                     <div
-                        class="bg-white/70 backdrop-blur-md border border-white/30 shadow-xl rounded-3xl p-10 relative overflow-hidden">
+                        class="bg-white/70 backdrop-blur-md border-1 border-white/30 shadow-md border-gray-400 rounded-3xl p-10 relative overflow-hidden">
                         <div
                             class="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-br from-primary-100 to-primary-300 rounded-full opacity-20 blur-3xl"></div>
                         <div

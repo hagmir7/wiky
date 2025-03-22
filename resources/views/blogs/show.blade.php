@@ -14,14 +14,7 @@
         z-index: 50;
     }
 
-    figure a img{
-        width: 100%;
-        height: auto;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        border-radius: 10px
 
-    }
 
     .progress-bar {
         height: 4px;
@@ -98,7 +91,7 @@
                     @endif
                 </div>
 
-                <div class="p-6 md:p-8 lg:p-10">
+                <div class="p-3 md:p-6">
                     <!-- Title and Meta -->
                     <div class="animate-fade-in" style="animation-delay: 0.1s">
                         <h1 class="text-xl md:text-2xl lg:text-3xl tracking-tight font-extrabold text-gray-900 leading-tight mb-4">
