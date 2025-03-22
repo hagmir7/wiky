@@ -128,30 +128,21 @@
             x-transition:leave-end="opacity-0 transform -translate-y-2"
             class="lg:hidden pb-4 h-screen">
             <div class="flex flex-col space-y-3">
-                <x-mobile-nav-link href="#" :active="request()->is('domain-name*')">DOMAIN NAME</x-mobile-nav-link>
-                <x-mobile-nav-link href="#" :active="request()->is('web-hosting*')">WEB HOSTING</x-mobile-nav-link>
-                <x-mobile-nav-link href="#" :active="request()->is('cloud-morocco*')">CLOUD MOROCCO</x-mobile-nav-link>
-                <x-mobile-nav-link href="#" :active="request()->is('nindobuilder*')">NINDOBUILDER</x-mobile-nav-link>
-                <x-mobile-nav-link href="#" :active="request()->is('email*')">EMAIL</x-mobile-nav-link>
-                <x-mobile-nav-link href="#" :active="request()->is('servers*')">SERVERS</x-mobile-nav-link>
-                <x-mobile-nav-link href="#" :active="request()->is('managed-services*')">MANAGED SERVICES
-                </x-mobile-nav-link>
-                <x-mobile-nav-link href="#" :active="request()->is('ssl*')">SSL</x-mobile-nav-link>
 
                 <div class="pt-4 border-t border-gray-200">
+                    <x-mobile-nav-link href="{{ route('home') }}" :active="request()->is('/*')" class="block">
+                        Home
+                    </x-mobile-nav-link>
                     <x-mobile-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')" class="block">
                         BLOG
                     </x-mobile-nav-link>
-                    <x-mobile-nav-link href="#" :active="request()->is('guides*')" class="block mt-3">GUIDES
+                    <x-mobile-nav-link href="{{ route('about') }}" :active="request()->is('about*')" class="block mt-3">
+                        ABOUT US
                     </x-mobile-nav-link>
-                    <x-mobile-nav-link href="#" :active="request()->is('promotions*')" class="block mt-3">PROMOTIONS
+                    <x-mobile-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')" class="block mt-3">
+                        CONTACT
                     </x-mobile-nav-link>
-                    <x-mobile-nav-link href="{{ route('about') }}" :active="request()->is('about*')" class="block mt-3">ABOUT US
-                    </x-mobile-nav-link>
-                    <x-mobile-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')" class="block mt-3">CONTACT
-                    </x-mobile-nav-link>
-                    <x-mobile-nav-link href="#" :active="request()->is('quote*')" class="block mt-3">REQUEST A QUOTE
-                    </x-mobile-nav-link>
+
                 </div>
             </div>
         </div>

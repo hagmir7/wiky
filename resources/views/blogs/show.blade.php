@@ -165,7 +165,7 @@
 
                     <!-- Facebook -->
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}&quote={{ $postTitle }}" target="_blank"
-                        class="bg-white text-blue-600 hover:bg-blue-600 hover:text-white p-3 rounded-full shadow-lg transition duration-300"
+                        class="bg-white text-blue-600 hover:bg-blue-600 hover:text-white p-3 rounded-full shadow-sm md:shadow-lg transition duration-300"
                         aria-label="Share on Facebook">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -176,7 +176,7 @@
 
                     <!-- Twitter/X -->
                     <a href="https://twitter.com/intent/tweet?url={{ $shareUrl }}&text={{ $postTitle }}" target="_blank"
-                        class="bg-white text-black hover:bg-black hover:text-white p-3 rounded-full shadow-lg transition duration-300"
+                        class="bg-white text-black hover:bg-black hover:text-white p-3 rounded-full shadow-sm md:shadow-lg transition duration-300"
                         aria-label="Share on Twitter/X">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -187,7 +187,7 @@
 
                     <!-- WhatsApp -->
                     <a href="https://api.whatsapp.com/send?text={{ $postTitle }}%20{{ $shareUrl }}" target="_blank"
-                        class="bg-white text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-full shadow-lg transition duration-300"
+                        class="bg-white text-green-500 hover:bg-green-500 hover:text-white p-3 rounded-full shadow-sm md:shadow-lg transition duration-300"
                         aria-label="Share on WhatsApp">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -198,7 +198,7 @@
 
                     <!-- LinkedIn -->
                     <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareUrl }}" target="_blank"
-                        class="bg-white text-blue-400 hover:bg-blue-400 hover:text-white p-3 rounded-full shadow-lg transition duration-300"
+                        class="bg-white text-blue-400 hover:bg-blue-400 hover:text-white p-3 rounded-full shadow-sm md:shadow-lg transition duration-300"
                         aria-label="Share on LinkedIn">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -209,7 +209,7 @@
 
                     <!-- Copy Link Button -->
                     <button onclick="copyToClipboard('{{ url()->current() }}')" id="copyLinkBtn"
-                        class="bg-white text-gray-800 hover:bg-gray-800 hover:text-white p-3 rounded-full shadow-lg transition duration-300"
+                        class="bg-white text-gray-800 hover:bg-gray-800 hover:text-white p-3 rounded-full shadow-sm md:shadow-lg transition duration-300"
                         aria-label="Copy Link">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -241,7 +241,7 @@
                     @endif
 
                     {{-- Content with Tailwind Typography (prose) --}}
-                    <div class="post-text prose prose-lg max-w-none prose-gray lg:prose-xl prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8 prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-3xl prose-h2:text-gray-800 prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-2xl prose-h3:text-gray-700 prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-blue-600 prose-a:font-medium prose-a:no-underline hover:prose-a:text-blue-800 hover:prose-a:underline prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-6 prose-blockquote:py-1 prose-blockquote:italic prose-blockquote:text-gray-700 prose-code:text-pink-600 prose-code:bg-gray-100 prose-code:rounded prose-code:px-1 prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-xl prose-pre:shadow-md prose-pre:font-mono prose-pre:text-sm prose-ol:text-gray-600 prose-ul:text-gray-600 prose-li:mb-2 prose-li:marker:text-blue-500 animate-fade-in" style="animation-delay: 0.3s">
+                    <div class="post-text prose prose-lg max-w-none prose-gray lg:prose-xl prose-img:rounded-xl prose-img:shadow-sm md:shadow-lg prose-img:my-8 prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-3xl prose-h2:text-gray-800 prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-2xl prose-h3:text-gray-700 prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-blue-600 prose-a:font-medium prose-a:no-underline hover:prose-a:text-blue-800 hover:prose-a:underline prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-6 prose-blockquote:py-1 prose-blockquote:italic prose-blockquote:text-gray-700 prose-code:text-pink-600 prose-code:bg-gray-100 prose-code:rounded prose-code:px-1 prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-xl prose-pre:shadow-md prose-pre:font-mono prose-pre:text-sm prose-ol:text-gray-600 prose-ul:text-gray-600 prose-li:mb-2 prose-li:marker:text-blue-500 animate-fade-in" style="animation-delay: 0.3s">
                         {!! $post->content !!}
                     </div>
 
@@ -256,7 +256,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($posts ?? [] as $post)
                     <a href="{{ route('blogs.show', $post) }}" class="group">
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-sm md:shadow-lg transition duration-300">
                             <img src="{{ optional($post->getMedia('posts-cover')->first())?->getUrl() ?? asset('default-image.jpg') }}"
                                 alt="{{ $post->title }}"
                                 class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">

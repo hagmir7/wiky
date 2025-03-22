@@ -20,7 +20,7 @@
             <div class="grid lg:grid-cols-2 justify-center gap-10">
                 <!-- Contact Information Column -->
                 <div class="space-y-10 opacity-0 animate-slide-right" style="animation-delay: 0.4s;">
-                    <div class="bg-white/70 backdrop-blur-md border border-white/30 shadow-lg rounded-2xl p-3 md:p-8 relative overflow-hidden">
+                    <div class="bg-white/70 backdrop-blur-md border border-white/30 shadow-sm md:shadow-lg rounded-2xl p-3 md:p-8 relative overflow-hidden">
                         <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary-200 to-primary-400 rounded-full opacity-20 blur-3xl"></div>
                         <h3 class="text-2xl font-bold text-primary-950 mb-6 relative">{{__('Connect With Us')}}</h3>
                         <div class="space-y-6 relative">
