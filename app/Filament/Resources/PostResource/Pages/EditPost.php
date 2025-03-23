@@ -5,15 +5,35 @@ namespace App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\HtmlString;
 
 class EditPost extends EditRecord
 {
     protected static string $resource = PostResource::class;
 
+    public function getTitle(): string|Htmlable
+    {
+        return new HtmlString("<span class='text-xl'>{$this->getRecordTitle()} </span>");
+    }
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->color('danger')
+                ->icon('heroicon-o-trash'),
+
+            Actions\CreateAction::make()
+                ->color('success')
+                ->url('/admin/posts/create')
+                ->icon('heroicon-o-plus-circle'),
+            Actions\Action::make('view')
+                ->label(__("Voir"))
+                ->color('info')
+                ->url(route('blogs.show', $this->record->slug))
+                ->openUrlInNewTab()
+                ->icon('heroicon-o-rocket-launch'),
         ];
     }
 }

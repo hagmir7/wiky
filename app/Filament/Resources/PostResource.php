@@ -24,6 +24,23 @@ class PostResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     protected static ?string $navigationGroup = NavigationGroups::CONTENT;
 
+    public static function getEloquentQuery(): Builder
+    {
+        return Post::query()->latest();
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __("Post");
+    }
+
+    protected static ?string $recordTitleAttribute = "title";
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title', 'description', 'content', 'tags'];
+    }
+
     public static function form(Form $form): Form
     {
         return $form
