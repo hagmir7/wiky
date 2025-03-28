@@ -23,11 +23,15 @@
             <div class="hidden lg:flex justify-between items-center py-1">
                 <!-- Left Links -->
                 <div class="flex space-x-6">
-                    <x-top-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')">BLOG</x-top-nav-link>
+                    <x-top-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')">BLOG
+                    </x-top-nav-link>
                     {{-- <x-top-nav-link href="#" :active="request()->is('guides*')">GUIDES</x-top-nav-link> --}}
                     {{-- <x-top-nav-link href="#" :active="request()->is('promotions*')">PROMOTIONS</x-top-nav-link> --}}
-                    <x-top-nav-link href="{{ route('about') }}" :active="request()->is('about*')">ABOUT US</x-top-nav-link>
-                    <x-top-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')">CONTACT</x-top-nav-link>
+                    <x-top-nav-link href="{{ route('about') }}" :active="request()->is('about*')">ABOUT US
+                    </x-top-nav-link>
+                    <x-top-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')">
+                        CONTACT
+                    </x-top-nav-link>
                 </div>
                 <!-- Right Section -->
                 <div class="flex items-center space-x-4">
@@ -93,17 +97,21 @@
             <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center space-x-6">
                 <x-nav-link href="{{ route('home') }}" :active="request()->is('/*')">{{ __("Home") }}</x-nav-link>
-                <x-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')">{{ __("Blog") }}</x-nav-link>
+                <x-nav-link href="{{ route('blogs.list') }}"
+                            :active="request()->is('blogs*')">{{ __("Blog") }}</x-nav-link>
                 {{-- <x-nav-link href="{{ route('books.home') }}" :active="request()->is('books*')">Books</x-nav-link> --}}
-                <x-nav-link href="{{ route('about') }}" :active="request()->is('about*')">{{ __("About us") }}</x-nav-link>
+                <x-nav-link href="{{ route('about') }}"
+                            :active="request()->is('about*')">{{ __("About us") }}</x-nav-link>
                 {{-- <x-nav-link href="#" :active="request()->is('collections*')">Collections</x-nav-link> --}}
-                <x-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')">{{ __("Contact us") }}</x-nav-link>
+                <x-nav-link href="{{ route('contacts.index') }}"
+                            :active="request()->is('contact-us*')">{{ __("Contact us") }}</x-nav-link>
                 {{-- <x-nav-link href="#" :active="request()->is('quotes*')">Quotes</x-nav-link> --}}
             </div>
 
             <!-- User and Cart Icons -->
-            <div class="hidden lg:flex items-center space-x-4">
-                <a href="#" class="text-gray-700">
+            <div class="hidden lg:flex items-center space-x-4"
+                 x-data="{ authDropDown: false, isAuthenticated: {{ auth()->check() ? 'true' : 'false' }}  }">
+                <button class="text-gray-700" @click.prevent="authDropDown = !authDropDown">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                         <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                            stroke-width="1.5">
@@ -112,7 +120,40 @@
                             <path d="M17 19.2c-.317-6.187-9.683-6.187-10 0"/>
                         </g>
                     </svg>
-                </a>
+                </button>
+
+                <div x-show="authDropDown" @click.outside="authDropDown = false" x-cloak
+                     class="absolute right-5 top-3/4 mt-2 py-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-10">
+                    <template x-if="isAuthenticated">
+                        <div class="py-2">
+                            <a href="{{ route('profile') }}"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-300">
+                                {{ __("Profile") }}
+                            </a>
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit"
+                                        class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-300">
+                                    {{ __("Logout") }}
+                                </button>
+                            </form>
+                        </div>
+                    </template>
+
+                    <template x-if="!isAuthenticated">
+                        <div class="py-2">
+                            <a href="{{ route('login') }}"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-300">
+                                {{ __("Login") }}
+                            </a>
+                            <a href="{{ route('register') }}"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-all duration-300">
+                                {{ __("Register") }}
+                            </a>
+                        </div>
+                    </template>
+                </div>
             </div>
         </div>
 
@@ -131,19 +172,23 @@
 
                 <div class="pt-4 border-t border-gray-200 space-y-7">
 
-                    <x-mobile-nav-link href="{{ route('home') }}" :active="request()->is('/*')" class="block mt-4 text-xl">
+                    <x-mobile-nav-link href="{{ route('home') }}" :active="request()->is('/*')"
+                                       class="block mt-4 text-xl">
                         Home
                     </x-mobile-nav-link>
 
-                    <x-mobile-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')" class="block mt-4 text-xl">
+                    <x-mobile-nav-link href="{{ route('blogs.list') }}" :active="request()->is('blogs*')"
+                                       class="block mt-4 text-xl">
                         BLOG
                     </x-mobile-nav-link>
 
-                    <x-mobile-nav-link href="{{ route('about') }}" :active="request()->is('about*')" class="block mt-4 text-xl">
+                    <x-mobile-nav-link href="{{ route('about') }}" :active="request()->is('about*')"
+                                       class="block mt-4 text-xl">
                         ABOUT US
                     </x-mobile-nav-link>
 
-                    <x-mobile-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')" class="block mt-4 text-xl">
+                    <x-mobile-nav-link href="{{ route('contacts.index') }}" :active="request()->is('contact-us*')"
+                                       class="block mt-4 text-xl">
                         CONTACT
                     </x-mobile-nav-link>
 

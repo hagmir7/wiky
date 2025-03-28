@@ -37,3 +37,19 @@ Route::get('/contact-us', function () {
 Route::get('/livewire/update', function () {
     return redirect()->back();
 });
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('/register', \App\Livewire\Auth\Registration::class)->name('register');
+    Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', \App\Livewire\Auth\Profile::class)->name('profile');
+    Route::post('/logout', function () {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
+    })->name('logout');
+});
