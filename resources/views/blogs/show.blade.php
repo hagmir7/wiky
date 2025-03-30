@@ -1,4 +1,4 @@
-@extends('layout.base')
+<x-layouts.base>
 
 @section('styles')
 <!-- Optional: Add custom styles for this page -->
@@ -274,4 +274,4 @@
         </div>
     </div>
 </section>
-@endsection
+</x-layouts.base>

@@ -92,7 +92,7 @@ class Profile extends Component
         return redirect()->route('home');
     }
 
-    #[Layout('layout.app')]
+    #[Layout('components.layouts.base')]
     public function render()
     {
         return view('livewire.auth.profile');

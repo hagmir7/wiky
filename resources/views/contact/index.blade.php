@@ -1,6 +1,4 @@
-@extends('layout.base')
-
-@section('content')
+<x-layouts.base>
     <div class="min-h-screen bg-gradient-to-b from-white to-primary-50">
         <div class="container mx-auto px-6 pt-24 max-w-6xl overflow-hidden">
             <header class="text-center mb-16 opacity-0 animate-fade-in" style="animation-delay: 0.2s;">
@@ -170,4 +168,4 @@
             </section>
         </div>
     </div>
-@endsection
+</x-layouts.base>

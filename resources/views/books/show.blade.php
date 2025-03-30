@@ -1,6 +1,4 @@
-@extends('layout.base')
-
-@section('content')
+<x-layouts.base>
 
     <div class="max-w-7xl mx-auto px-4 md:px-6 pt-12 lg:pt-20">
         <div class="bg-white rounded-xl shadow-xl">
@@ -119,4 +117,4 @@
         </div>
     </div>
 
-@endsection
+</x-layouts.base>

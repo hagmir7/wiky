@@ -30,7 +30,7 @@
     <x-nav />
 
     <main class="mt-16 lg:mt-24">
-        @yield('content')
+        {{ $slot }}
     </main>
 
     <x-footer />

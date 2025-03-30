@@ -43,7 +43,7 @@ class Registration extends Component
         return redirect()->route('home');
     }
 
-    #[Layout('layout.app')]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.auth.registration');

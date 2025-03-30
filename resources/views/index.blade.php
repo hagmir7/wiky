@@ -1,6 +1,4 @@
-@extends('layout.base')
-
-@section('content')
+<x-layouts.base>
     <x-swiper />
 
     <div class="container max-w-7xl mx-auto pt-12 lg:pt-20">
@@ -30,4 +28,4 @@
 
         </div>
     </div>
-@endsection
+</x-layouts.base>

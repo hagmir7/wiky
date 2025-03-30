@@ -38,7 +38,7 @@ class Login extends Component
         $this->addError('password', 'The provided credentials do not match our records.');
     }
 
-    #[Layout('layout.app')]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.auth.login');
