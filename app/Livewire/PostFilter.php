@@ -17,8 +17,6 @@ class PostFilter extends Component
 
     #[Url]
     public string $search = '';
-
-
     public int $perPage = 12;
     public $totalBlogs = 0;
 
@@ -56,6 +54,12 @@ class PostFilter extends Component
             ->when($this->search, function (Builder $query) {
                 $searchTerm = '%' . trim($this->search) . '%';
                 $query->where(function (Builder $q) use ($searchTerm) {
+                    $q->where('title', 'like', $searchTerm)
+                        ->orWhere('description', 'like', $searchTerm)
+                        ->orWhere('content', 'like', $searchTerm)
+                        ->orWhere('tags', 'like', $searchTerm)
+                        ->orWhereHas('user', fn (Builder $q) => $q->where('first_name', 'like', $searchTerm))
+                        ->orWhereHas('user', fn (Builder $q) => $q->where('last_name', 'like', $searchTerm));
                     $q->whereHas('book', fn (Builder $q) => $q->where('name', 'like', $searchTerm)
                         ->orWhereHas('author', fn (Builder $q) => $q->where('full_name', 'like', $searchTerm)))
                         ->orWhereHas('categories', fn (Builder $q) => $q->where('name', 'like', $searchTerm));
