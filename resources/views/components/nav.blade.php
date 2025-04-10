@@ -87,12 +87,33 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button class="lg:hidden" @click="mobileMenuOpen = !mobileMenuOpen">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+            <div class="flex items-center lg:hidden space-x-4">
+
+                @guest()
+                    <a href="{{ route("login") }}"
+                       class="text-primary-500 font-bold decoration-slice underline-offset-4">
+                        {{ __("Login") }}
+                    </a>
+                @else
+                    <a href="{{ route('profile') }}" class="text-primary-500 font-semibold decoration-slice underline-offset-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                               stroke-width="1.5">
+                                <path d="M14.5 9.1a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0"/>
+                                <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0"/>
+                                <path d="M17 19.2c-.317-6.187-9.683-6.187-10 0"/>
+                            </g>
+                        </svg>
+                    </a>
+                @endguest
+
+                <button @click="mobileMenuOpen = !mobileMenuOpen">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
 
             <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center space-x-6">
@@ -191,6 +212,21 @@
                                        class="block mt-4 text-xl">
                         CONTACT
                     </x-mobile-nav-link>
+
+                    @guest()
+                        <a href="{{ route("register") }}"
+                           class="block mt-4 text-blue-500 font-bold underline decoration-slice underline-offset-4">
+                            {{ __("Register") }}
+                        </a>
+                    @else
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                    class="block mt-4 text-blue-500 font-bold underline decoration-slice underline-offset-4">
+                                {{ __("Logout") }}
+                            </button>
+                        </form>
+                    @endguest
 
                 </div>
             </div>

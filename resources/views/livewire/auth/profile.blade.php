@@ -32,7 +32,7 @@
 
                                 <div class="col-span-6">
                                     <label class="block text-sm font-medium text-gray-700">{{ __("Profile Photo") }}</label>
-                                    <div class="mt-1 flex items-center">
+                                    <div class="mt-1 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
                                         <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
                                             @if(auth()->user()->getFirstMediaUrl('users-avatar'))
                                                 <img src="{{ auth()->user()->getFirstMediaUrl('users-avatar') }}" alt="Profile Photo" class="h-full w-full object-cover rounded-full">
@@ -42,7 +42,7 @@
                                                 </svg>
                                             @endif
                                         </span>
-                                        <input wire:model="avatar" type="file" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-300">
+                                        <x-forms.input model="avatar" type="file" error="{{ $errors->first('avatar') }}"/>
                                     </div>
                                     @error('avatar') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
