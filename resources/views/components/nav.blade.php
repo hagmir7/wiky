@@ -82,7 +82,7 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="{{ route('home') }}">
-                    <img src="{{asset('wiky.png')}}" alt="Wiky Book" class="h-12">
+                    <x-app-logo class="h-12"/>
                 </a>
             </div>
 

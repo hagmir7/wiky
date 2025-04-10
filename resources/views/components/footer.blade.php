@@ -20,8 +20,7 @@
         <div class="container mx-auto px-4 py-8">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="mb-6 md:mb-0">
-                    <img src="{{ asset('wiky.png') }}"
-                         alt="Wikybook" class="w-52 rounded-xl">
+                    <x-app-logo class="w-52 rounded-xl"/>
                 </div>
 
                 <div class="flex flex-wrap justify-center md:justify-end space-x-4 mb-6 md:mb-0">
