@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Auth;
 
-use App\Enums\UserStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -26,9 +25,8 @@ class Login extends Component
         $validatedData = $this->validate();
 
         if (Auth::attempt([
-            'email' => $this->email,
-            'password' => $this->password,
-            'status' => UserStatusEnum::Active
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
         ], $this->remember)) {
             session()->regenerate();
             return redirect()->intended(route('home'));

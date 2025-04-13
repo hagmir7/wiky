@@ -40,7 +40,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasMedia
     }
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that sh--ould be hidden for serialization.
      *
      * @var array<int, string>
      */

@@ -4,13 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 *{
     font-family: "Mulish", sans-serif;
 }
 
+.prose p {
+    line-height: 1.8;
+}
 
 .post-text h1 {
     font-size: 36px;
