@@ -21,9 +21,9 @@ class PostFactory extends Factory
         $title = $this->faker->unique()->sentence();
         return [
             'title' => $title,
-            'user_id' => User::factory(),
+            'user_id' => null,
             'description' => $this->faker->paragraph(),
-            'book_id' => $this->faker->boolean(70) ? Book::factory() : null,
+            'book_id' => null,
             'content' => $this->faker->paragraphs(5, true),
             'slug' => Str::slug($title),
         ];

@@ -23,9 +23,11 @@ class BookFactory extends Factory
         $name = $this->faker->unique()->sentence();
         return [
             'name' => $name,
-            'user_id' => User::factory(),
-            'author_id' => Author::factory(),
-            'series_id' => $this->faker->boolean(70) ? Series::factory() : null,
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory(),
+            'author_id' => Author::inRandomOrder()->first()->id ?? Author::factory(),
+            'series_id' => $this->faker->boolean(30)
+                ? Series::inRandomOrder()->first()->id ?? Series::factory()
+                : null,
             'description' => $this->faker->paragraphs(3, true),
             'content' => $this->faker->paragraphs(10, true),
             'isbn' => $this->faker->isbn10(),
