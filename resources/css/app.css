@@ -8,6 +8,10 @@
     font-family: "Mulish", sans-serif;
 }
 
+.prose {
+    box-shadow: none !important;
+}
+
 .prose p {
     line-height: 1.8;
 }
