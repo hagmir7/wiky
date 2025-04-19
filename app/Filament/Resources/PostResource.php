@@ -105,6 +105,10 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('user.first_name')
                     ->sortable(),
 
+                Tables\Columns\TextColumn::make('visits')
+                    ->getStateUsing(fn ($record) => visits($record)->count())
+                    ->icon('heroicon-o-eye'),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
