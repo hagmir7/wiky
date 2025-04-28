@@ -20,6 +20,7 @@
     <link rel="manifest" href="/site.webmanifest" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta name="google-site-verification" content="0j9HFi1WK3cRoDq82BlgbYJSHmX0DgLxqvgD_erZqAo" />
+    <meta name="google-adsense-account" content="ca-pub-4988709924825156">
     @stack('head::styles')
     @stack('head::scripts')
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
