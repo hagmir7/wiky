@@ -18,8 +18,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="google-site-verification" content="E2N8kZg52up1q1AY9fEaHW9LQD_RdEBmPcfhqc6Bqdc" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="google-site-verification" content="0j9HFi1WK3cRoDq82BlgbYJSHmX0DgLxqvgD_erZqAo" />
     @stack('head::styles')
     @stack('head::scripts')
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
