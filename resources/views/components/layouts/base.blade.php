@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ isset($title) ? $title : __("WikyBook – Your Hub for Book Summaries")  }}</title>
-    <meta name="description" content="{{ isset($description) ? $description : __("WikyBook is a platform where you can find summaries of your favorite books. We provide summaries of books in various categories.") }}">
+    <meta name="description" content="{{ isset($description) ? Str::limit($description, 154, "..") : __("WikyBook is a platform where you can find summaries of your favorite books. We provide summaries of books in various categories.") }}">
     <meta name="keywords" content="{{ isset($keywords) ? $keywords : __("wikybook, book summaries, book summary, book, summary, summaries") }}">
     <meta name="author" content="{{ isset($author) ? $author : __("WikyBook") }}">
     <meta name="robots" content="{{ isset($robots) ? $robots : "index, follow" }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="canonical" href="{{ request()->fullUrl() }}" />
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
