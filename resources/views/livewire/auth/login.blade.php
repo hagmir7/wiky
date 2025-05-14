@@ -1,3 +1,15 @@
+<x-slot name="title">
+    {{ __("WikyBook") }} – {{ __("Sign in to your account") }}
+</x-slot>
+
+<x-slot name="description">
+    {{ __("Connecting book lovers, authors, and readers in a vibrant digital library ecosystem.") }}
+</x-slot>
+
+<x-slot name="keywords">
+    {{ __("wikybook, book summaries, book summary, book, summary, summaries") }}
+</x-slot>
+
 <div
     class="min-h-screen bg-gradient-to-b from-white to-primary-50 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
     <div

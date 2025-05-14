@@ -1,4 +1,15 @@
 <x-layouts.base>
+    <x-slot name="title">
+        {{ $page->title }} – {{ config('app.name') }}
+    </x-slot>
+
+    <x-slot name="description">
+        {{ __("Wikybook is dedicated to providing book summaries, author profiles, quotes, and book reviews.") }}
+    </x-slot>
+
+    <x-slot name="keywords">
+        {{ __("wikybook, book summaries, book summary, book, summary, summaries") }}
+    </x-slot>
 
 @section('styles')
 <!-- Optional: Add custom styles for this page -->

@@ -1,4 +1,16 @@
 <x-layouts.base>
+    <x-slot name="title">
+        {{ __("Contact Us") }} – {{ config('app.name') }}
+    </x-slot>
+
+    <x-slot name="description">
+        {{ __("We'd love to hear from you. Reach out with questions, feedback, or partnership opportunities.") }}
+    </x-slot>
+
+    <x-slot name="keywords">
+        {{ __("wikybook, book summaries, book summary, book, summary, summaries") }}
+    </x-slot>
+
     <div class="min-h-screen bg-gradient-to-b from-white to-primary-50">
         <div class="container mx-auto px-6 pt-24 max-w-6xl overflow-hidden">
             <header class="text-center mb-16 opacity-0 animate-fade-in" style="animation-delay: 0.2s;">

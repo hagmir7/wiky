@@ -1,5 +1,17 @@
 <x-layouts.base>
 
+    <x-slot name="title">
+        {{ $post->title }} - {{ config('app.name') }}
+    </x-slot>
+
+    <x-slot name="description">
+        {{ $post->description }}
+    </x-slot>
+
+    <x-slot name="keywords">
+        {{ $post->tags }}
+    </x-slot>
+
 @section('styles')
 <!-- Optional: Add custom styles for this page -->
 <style>
