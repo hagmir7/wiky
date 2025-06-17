@@ -175,7 +175,7 @@
                     $postTitle = urlencode($post->title);
                     @endphp
 
-                    <!-- Facebook -->
+                    {{-- <!-- Facebook -->
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}&quote={{ $postTitle }}" target="_blank"
                         class="bg-white text-blue-600 hover:bg-blue-600 hover:text-white p-3 rounded-full shadow-sm md:shadow-lg transition duration-300"
                         aria-label="Share on Facebook">
@@ -184,7 +184,7 @@
                                 d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z">
                             </path>
                         </svg>
-                    </a>
+                    </a> --}}
 
                     <!-- Twitter/X -->
                     <a href="https://twitter.com/intent/tweet?url={{ $shareUrl }}&text={{ $postTitle }}" target="_blank"
@@ -253,7 +253,24 @@
                     @endif
 
                     {{-- Content with Tailwind Typography (prose) --}}
-                    <div class="post-text prose prose-lg max-w-none prose-gray lg:prose-xl prose-img:rounded-xl prose-img:shadow-sm md:shadow-lg prose-img:my-8 prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-3xl prose-h2:text-gray-800 prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-2xl prose-h3:text-gray-700 prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-blue-600 prose-a:font-medium prose-a:no-underline hover:prose-a:text-blue-800 hover:prose-a:underline prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-6 prose-blockquote:py-1 prose-blockquote:italic prose-blockquote:text-gray-700 prose-code:text-pink-600 prose-code:bg-gray-100 prose-code:rounded prose-code:px-1 prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-xl prose-pre:shadow-md prose-pre:font-mono prose-pre:text-sm prose-ol:text-gray-600 prose-ul:text-gray-600 prose-li:mb-2 prose-li:marker:text-blue-500 animate-fade-in" style="animation-delay: 0.3s">
+                    <div class="prose prose-lg prose-invert prose-headings:font-bold prose-headings:tracking-tight
+                        prose-h1:text-4xl prose-h1:mb-6 prose-h1:text-white
+                        prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-gray-100 prose-h2:border-b prose-h2:border-gray-700 prose-h2:pb-2
+                        prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-gray-200
+                        prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
+                        prose-a:text-blue-400 prose-a:no-underline prose-a:font-medium hover:prose-a:text-blue-300 prose-a:transition-colors
+                        prose-strong:text-gray-100 prose-strong:font-semibold
+                        prose-em:text-gray-200 prose-em:italic
+                        prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-gray-800/50
+                        prose-blockquote:rounded-r-lg prose-blockquote:py-3 prose-blockquote:px-6 prose-blockquote:my-8
+                        prose-blockquote:text-gray-200 prose-blockquote:italic prose-blockquote:font-medium
+                        prose-ul:text-gray-300 prose-ol:text-gray-300
+                        prose-li:mb-2 prose-li:leading-relaxed
+                        prose-code:bg-gray-800 prose-code:text-blue-300 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
+                        prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-lg
+                        prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8
+                        prose-hr:border-gray-700 prose-hr:my-12
+                        max-w-none animate-fade-in" style="animation-delay: 0.3s">
                         {!! $post->content !!}
                     </div>
 

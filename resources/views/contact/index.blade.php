@@ -88,15 +88,15 @@
                         <div class="mt-4">
                             <h4 class="text-lg font-semibold text-primary-950 mb-4">{{__("Follow Us")}}</h4>
                             <div class="flex space-x-4">
-                                <a href="https://t.me/wikybook" target="_black"
+                                {{-- <a href="https://t.me/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
                                               stroke-linejoin="round" stroke-width="1.5"
                                               d="M20 5L4.672 11.373c-.395.164-.592.247-.643.354a.3.3 0 0 0 .016.29c.063.1.268.16.68.281L10.5 14M20 5l-2.065 13.049c-.04.254-.06.381-.127.45a.3.3 0 0 1-.223.097c-.097 0-.205-.072-.421-.216l-2.93-1.956M20 5l-9.5 9m0 0l.156 4.3c0 .334 0 .501.069.585c.06.074.15.116.246.115c.11-.001.24-.108.5-.32l2.764-2.256M10.5 14l3.735 2.424"/>
                                     </svg>
-                                </a>
-                                <a href="https://pinterest.com/wikybook" target="_black"
+                                </a> --}}
+                                {{-- <a href="https://pinterest.com/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                         <g fill="none" stroke="currentColor" stroke-linecap="round"
@@ -106,8 +106,8 @@
                                             <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0"/>
                                         </g>
                                     </svg>
-                                </a>
-                                <a href="https://instagram.com/wikybook" target="_black"
+                                </a> --}}
+                                {{-- <a href="https://instagram.com/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                         <g fill="none" stroke="currentColor" stroke-linecap="round"
@@ -118,7 +118,7 @@
                                                 d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6z"/>
                                         </g>
                                     </svg>
-                                </a>
+                                </a> --}}
                                 <a href="https://facebook.com/wikybook" target="_black"
                                    class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 transition-all duration-500 lg:hover:bg-primary-600 hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">

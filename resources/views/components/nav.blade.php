@@ -36,7 +36,7 @@
                 <!-- Right Section -->
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-4">
-                        <div class="flex justify-center items-center gap-2">
+                        {{-- <div class="flex justify-center items-center gap-2">
                             <a href="https://www.t.me/wikybook" class="hover:text" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                     <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -44,7 +44,7 @@
                                           d="M20 5L4.672 11.373c-.395.164-.592.247-.643.354a.3.3 0 0 0 .016.29c.063.1.268.16.68.281L10.5 14M20 5l-2.065 13.049c-.04.254-.06.381-.127.45a.3.3 0 0 1-.223.097c-.097 0-.205-.072-.421-.216l-2.93-1.956M20 5l-9.5 9m0 0l.156 4.3c0 .334 0 .501.069.585c.06.074.15.116.246.115c.11-.001.24-.108.5-.32l2.764-2.256M10.5 14l3.735 2.424"/>
                                 </svg>
                             </a>
-                        </div>
+                        </div> --}}
                         <span class="mx-2">|</span>
                         <div class="flex justify-center items-center gap-2">
                             <a href="https://www.facebook.com/wikybook" class="hover:text" target="_blank">
@@ -55,7 +55,7 @@
                                 </svg>
                             </a>
                         </div>
-                        <span class="mx-2">|</span>
+                        {{-- <span class="mx-2">|</span>
                         <div class="flex justify-center items-center gap-2">
                             <a href="https://www.instagram.com/wikybook" class="hover:text" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@
                                 </svg>
                             </a>
 
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
